@@ -1,46 +1,66 @@
 package org.usfirst.frc.team1350.robot.commands;
 
+import org.usfirst.frc.team1350.robot.Log;
+import org.usfirst.frc.team1350.robot.Robot;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class TeleOpTankDrive extends Command{
+/**
+ *
+ */
+public class TeleOpTankDrive extends Command {
 	
-	//Singleton
-	private TeleOpTankDrive instance;
-	public TeleOpTankDrive getInstance(){
+	//singleton
+	private static TeleOpTankDrive instance;
+	public static TeleOpTankDrive getInstance(){
 		if (instance==null){
 			instance = new TeleOpTankDrive();
 		}
 		return instance;
 	}
 
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
-		
-	}
+	private boolean squaredInputs;
+	
+    public TeleOpTankDrive() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	super("TeleOpTankDrive");
+    	requires(Robot.drivetrain);
+    }
 
-	@Override
-	protected void execute() {
-		// TODO Auto-generated method stub
-		
-	}
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    	Log.info("Initializing TeleOpTankDrive");
+    	squaredInputs = true;
+    }
 
-	@Override
-	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	Robot.drivetrain.tankDrive(getLeftStick(), getRightStick(), squaredInputs);
+    }
 
-	@Override
-	protected void end() {
-		// TODO Auto-generated method stub
-		
-	}
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return false;
+    }
 
-	@Override
-	protected void interrupted() {
-		// TODO Auto-generated method stub
-		
-	}
+    // Called once after isFinished returns true
+    protected void end() {
+    }
 
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    }
+    
+    private static Joystick getLeftStick(){
+    	//TODO:get left stick 
+    	return Robot.oi.leftStick;
+    }
+    
+    private static Joystick getRightStick(){
+    	//TODO:get right stick
+    	return Robot.oi.rightStick;
+    }
 }
