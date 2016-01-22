@@ -34,6 +34,7 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
+	//Singleton
 	private static OI instance;
 	public static OI getInstance(){
 		if (instance==null){
@@ -42,13 +43,16 @@ public class OI {
 		return instance;
 	}
 	
+	
 	private OI(){
 		Log.info("Initializing OI");
 	}
 	
+	
 	public Joystick leftStick;
 	public Joystick rightStick;
 	
+	//Initialize inputs
 	public void init(){
 		leftStick = new Joystick(RobotMap.JOYSTICK_LEFT);
 		rightStick = new Joystick(RobotMap.JOYSTICK_RIGHT);

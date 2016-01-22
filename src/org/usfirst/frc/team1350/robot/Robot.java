@@ -20,13 +20,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-//	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
     public static Drivetrain drivetrain;
     public CameraServer camera;
 
+    
     Command autonomousCommand;
     SendableChooser chooser;
+    
+    
+    public Robot(){
+    	//start camera server and start auto capture
+    	camera = CameraServer.getInstance();
+    	camera.setQuality(50);
+		camera.startAutomaticCapture("cam2");
+    }
     
 
     /**
@@ -34,15 +42,13 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	//Initilaze subsystems and oi
 		oi = OI.getInstance();
 		oi.init();
 		drivetrain = Drivetrain.getInstance();
-		drivetrain.init();
+		drivetrain.init();		
 		
-		camera = CameraServer.getInstance();
-		camera.setQuality(50);
-		camera.startAutomaticCapture("cam2");
-		
+		//define autonomous chooser
         chooser = new SendableChooser();
 //        chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());

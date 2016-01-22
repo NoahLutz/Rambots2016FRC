@@ -3,7 +3,6 @@ package org.usfirst.frc.team1350.robot.commands;
 import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.Robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -20,19 +19,25 @@ public class TeleOpTankDrive extends Command {
 		return instance;
 	}
 
+	//define variables
 	private boolean squaredInputs;
 	private final static double speed = 1;
 	
     public TeleOpTankDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	//Send name for debugging
     	super("TeleOpTankDrive");
+    	
+    	//define required subsystems
     	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Log.info("Initializing TeleOpTankDrive");
+    	
+    	
     	squaredInputs = true;
     }
 
