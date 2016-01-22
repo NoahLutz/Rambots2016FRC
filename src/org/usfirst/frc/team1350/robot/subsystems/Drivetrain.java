@@ -17,7 +17,7 @@ public class Drivetrain extends Subsystem {
 	
 	//Singleton
 	private static Drivetrain instance;
-	public Drivetrain getInstance(){
+	public static Drivetrain getInstance(){
 		if (instance==null){
 			instance = new Drivetrain();
 		}
@@ -44,8 +44,8 @@ public class Drivetrain extends Subsystem {
 		robotDrive = new RobotDrive(leftMotorController, rightMotorController);
 	}
 	
-	public void tankDrive(Joystick left, Joystick right, boolean squaredInputs){
-		robotDrive.tankDrive(left, right, squaredInputs);
+	public void tankDrive(double left, double right, boolean squaredInputs){
+		robotDrive.tankDrive(-left, -right, squaredInputs);
 	}
 	
 	public void autoDrive(double speed, double curve){

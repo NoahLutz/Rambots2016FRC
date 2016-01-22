@@ -34,9 +34,25 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
+	private static OI instance;
+	public static OI getInstance(){
+		if (instance==null){
+			instance = new OI();
+		}
+		return instance;
+	}
 	
+	private OI(){
+		Log.info("Initializing OI");
+	}
 	
-	public Joystick leftStick = new Joystick(RobotMap.JOYSTICK_LEFT);
-	public Joystick rightStick = new Joystick(RobotMap.JOYSTICK_RIGHT);
+	public Joystick leftStick;
+	public Joystick rightStick;
+	
+	public void init(){
+		leftStick = new Joystick(RobotMap.JOYSTICK_LEFT);
+		rightStick = new Joystick(RobotMap.JOYSTICK_RIGHT);
+	}
+	
 }
 

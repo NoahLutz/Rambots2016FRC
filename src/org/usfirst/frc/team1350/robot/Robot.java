@@ -3,6 +3,7 @@ package org.usfirst.frc.team1350.robot;
 
 import org.usfirst.frc.team1350.robot.subsystems.Drivetrain;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -22,6 +23,7 @@ public class Robot extends IterativeRobot {
 //	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
     public static Drivetrain drivetrain;
+    public CameraServer camera;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -32,7 +34,15 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
+		oi = OI.getInstance();
+		oi.init();
+		drivetrain = Drivetrain.getInstance();
+		drivetrain.init();
+		
+		camera = CameraServer.getInstance();
+		camera.setQuality(50);
+		camera.startAutomaticCapture("cam2");
+		
         chooser = new SendableChooser();
 //        chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());

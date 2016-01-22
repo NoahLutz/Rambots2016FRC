@@ -21,6 +21,7 @@ public class TeleOpTankDrive extends Command {
 	}
 
 	private boolean squaredInputs;
+	private final static double speed = 1;
 	
     public TeleOpTankDrive() {
         // Use requires() here to declare subsystem dependencies
@@ -54,13 +55,13 @@ public class TeleOpTankDrive extends Command {
     protected void interrupted() {
     }
     
-    private static Joystick getLeftStick(){
+    private static double getLeftStick(){
     	//TODO:get left stick 
-    	return Robot.oi.leftStick;
+    	return (Robot.oi.leftStick.getY()) * speed;
     }
     
-    private static Joystick getRightStick(){
+    private static double getRightStick(){
     	//TODO:get right stick
-    	return Robot.oi.rightStick;
+    	return (Robot.oi.rightStick.getY()) * speed;
     }
 }
