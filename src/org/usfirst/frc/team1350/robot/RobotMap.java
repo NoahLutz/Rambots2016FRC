@@ -22,4 +22,10 @@ public class RobotMap {
 	
 	public static final int JOYSTICK_LEFT = 0;
 	public static final int JOYSTICK_RIGHT = 1; 
+	
+	public static final int SHOOTER_LEFT_MOTOR_CONTROLLER = 2;
+	public static final int SHOOTER_RIGHT_MOTOR_CONTROLLER = 3;
+	
+	public static final int SHOOTER_TILT_LEFT_MOTOR_CONTROLLER = 4;
+	public static final int SHOOTER_TILT_RIGHT_MOTOR_CONTROLLER = 5;
 }
