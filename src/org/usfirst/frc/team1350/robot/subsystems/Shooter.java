@@ -16,13 +16,16 @@ public class Shooter extends Subsystem {
 	
 	//singleton
 	private static Shooter instance;
-	public Shooter getInsatnce(){
+	public static Shooter getInstance(){
 		if (instance==null){
 			instance = new Shooter();
 		}
 		return instance;
 	}
 
+	public final boolean FORWARD = true;
+	public final boolean REVERSE = false;
+	
 	private Victor leftLauncherMotorController;
 	private Victor rightLauncherMotorController;
 	
@@ -30,8 +33,12 @@ public class Shooter extends Subsystem {
 	private Talon rightTiltMotorController;
 	
 	//TODO: create electric solenoid thingy
+	//TODO: some sort of sensor for detecting if the ball is in the shooter
+	
+	private static double launcherTilt;
 	
 	public void init(){
+		launcherTilt = 0;
 		leftLauncherMotorController = new Victor(RobotMap.SHOOTER_LEFT_MOTOR_CONTROLLER);
 		rightLauncherMotorController = new Victor(RobotMap.SHOOTER_RIGHT_MOTOR_CONTROLLER);
 		
@@ -39,6 +46,36 @@ public class Shooter extends Subsystem {
 		rightTiltMotorController = new Talon(RobotMap.SHOOTER_TILT_RIGHT_MOTOR_CONTROLLER);
 		
 		//TODO: initialize solenoid thingy
+	}
+	
+	public static double getTilt(){
+		return launcherTilt;
+	}
+	
+	public static void setTilt(double angle){
+		launcherTilt = angle;
+	}
+	
+	//if direction is set to false, it will run in reverse
+	public void runShooterMotor(double speed, boolean direction){
+		//adjust speed if needed
+		if(!direction){
+			//halve the speed and reverse the direction
+			speed = -(speed/2);
+		}
+		
+		leftLauncherMotorController.set(speed);
+		rightLauncherMotorController.set(speed);
+	}
+	
+	public void stopMotors(){
+		leftLauncherMotorController.set(0);
+		rightLauncherMotorController.set(0);
+	}
+	
+	public boolean ballIsInShooter(){
+		//TODO: look at sensor to see if the ball is in the shooter
+		return false;
 	}
 	
 	

@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1350.robot;
 
 import org.usfirst.frc.team1350.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team1350.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -22,6 +23,7 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
     public static Drivetrain drivetrain;
+    public static Shooter shooter;
     public CameraServer camera;
 
     
@@ -46,7 +48,9 @@ public class Robot extends IterativeRobot {
 		oi = OI.getInstance();
 		oi.init();
 		drivetrain = Drivetrain.getInstance();
-		drivetrain.init();		
+		drivetrain.init();	
+		shooter = Shooter.getInstance();
+		shooter.init();
 		
 		//define autonomous chooser
         chooser = new SendableChooser();
