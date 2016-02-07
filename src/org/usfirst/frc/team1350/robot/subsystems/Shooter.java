@@ -68,9 +68,24 @@ public class Shooter extends Subsystem {
 		rightLauncherMotorController.set(speed);
 	}
 	
-	public void stopMotors(){
-		leftLauncherMotorController.set(0);
-		rightLauncherMotorController.set(0);
+	public void stopShooterMotors(){
+		leftLauncherMotorController.set(0.0);
+		rightLauncherMotorController.set(0.0);
+	}
+	
+	public void runTiltMotors(double speed, boolean direction){
+		if(!direction){
+			//no need to halve the speed here
+			speed = -speed;
+		}
+		
+		leftTiltMotorController.set(speed);
+		rightTiltMotorController.set(speed);
+	}
+	
+	public void stopTiltMotors(){
+		leftTiltMotorController.set(0.0);
+		rightTiltMotorController.set(0.0);
 	}
 	
 	public boolean ballIsInShooter(){
