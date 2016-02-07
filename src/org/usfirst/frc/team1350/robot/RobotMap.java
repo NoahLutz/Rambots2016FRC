@@ -35,5 +35,7 @@ public class RobotMap {
 	public static final int ULTRASONIC_PING = 8;
 	public static final int ULTRASONIC_ECHO = 9;
 	
+	public static final int SHOOTER_BOTTOM_LIMIT_SWITCH = 0;
+	
 	
 }

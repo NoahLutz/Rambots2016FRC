@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1350.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -48,14 +49,20 @@ public class OI {
 		Log.info("Initializing OI");
 	}
 	
-	
 	public Joystick leftStick;
 	public Joystick rightStick;
+	
+	public DigitalInput shooterBottomLimit;
 	
 	//Initialize inputs
 	public void init(){
 		leftStick = new Joystick(RobotMap.JOYSTICK_LEFT);
 		rightStick = new Joystick(RobotMap.JOYSTICK_RIGHT);
+		shooterBottomLimit = new DigitalInput(RobotMap.SHOOTER_BOTTOM_LIMIT_SWITCH);
+	}
+	
+	public boolean isShooterLimitHit(){
+		return shooterBottomLimit.get();
 	}
 	
 }
