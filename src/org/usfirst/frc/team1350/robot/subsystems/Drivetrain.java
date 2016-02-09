@@ -4,9 +4,8 @@ import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.RobotMap;
 import org.usfirst.frc.team1350.robot.commands.TeleOpTankDrive;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -25,8 +24,8 @@ public class Drivetrain extends Subsystem {
 	}
     
     
-	private Talon leftMotorController;
-	private Talon rightMotorController;
+	private Victor leftMotorController;
+	private Victor rightMotorController;
 	private RobotDrive robotDrive;
 	private TeleOpTankDrive tankDrive;
 	
@@ -39,8 +38,8 @@ public class Drivetrain extends Subsystem {
 	
 	public void init(){
 		tankDrive =TeleOpTankDrive.getInstance();
-		leftMotorController = new Talon(RobotMap.DRIVE_TRAIN_LEFT_MOTOR_CONTROLLER);
-		rightMotorController = new Talon(RobotMap.DRIVE_TRAIN_RIGHT_MOTOR_CONTROLLER);
+		leftMotorController = new Victor(RobotMap.DRIVE_TRAIN_LEFT_MOTOR_CONTROLLER);
+		rightMotorController = new Victor(RobotMap.DRIVE_TRAIN_RIGHT_MOTOR_CONTROLLER);
 		robotDrive = new RobotDrive(leftMotorController, rightMotorController);
 	}
 	

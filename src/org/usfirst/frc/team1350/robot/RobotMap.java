@@ -20,6 +20,20 @@ public class RobotMap {
 	public static final int DRIVE_TRAIN_LEFT_MOTOR_CONTROLLER = 1;
 	public static final int DRIVE_TRAIN_RIGHT_MOTOR_CONTROLLER = 0;
 	
-	public static final int JOYSTICK_LEFT = 1;
-	public static final int JOYSTICK_RIGHT = 0; 
+	public static final int JOYSTICK_LEFT = 0;
+	public static final int JOYSTICK_RIGHT = 1; 
+	
+	public static final int SHOOTER_LEFT_MOTOR_CONTROLLER = 2;
+	public static final int SHOOTER_RIGHT_MOTOR_CONTROLLER = 3;
+	
+	public static final int SHOOTER_TILT_LEFT_MOTOR_CONTROLLER = 4;
+	public static final int SHOOTER_TILT_RIGHT_MOTOR_CONTROLLER = 5;
+	
+	public static final int ULTRASONIC_ECHO_PULSE_OUTPUT = 6;
+	public static final int ULTRASONIC_TRIGGER_PULSE_INPUT = 7;
+	
+	public static final int ULTRASONIC_PING = 8;
+	public static final int ULTRASONIC_ECHO = 9;
+	
+	
 }
