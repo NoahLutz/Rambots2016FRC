@@ -3,6 +3,9 @@ package org.usfirst.frc.team1350.robot;
 
 import org.usfirst.frc.team1350.robot.subsystems.Drivetrain;
 
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,18 +25,19 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
     public static Drivetrain drivetrain;
-    public CameraServer camera;
 
+    private int currSession;
+    private int session1;
+    private int session2;
+    private Image frame;
+    
     
     Command autonomousCommand;
     SendableChooser chooser;
     
     
     public Robot(){
-    	//start camera server and start auto capture
-    	camera = CameraServer.getInstance();
-    	camera.setQuality(50);
-		camera.startAutomaticCapture("cam1");
+    	Log.info("Initializing Robot");
     }
     
 
@@ -46,7 +50,17 @@ public class Robot extends IterativeRobot {
 		oi = OI.getInstance();
 		oi.init();
 		drivetrain = Drivetrain.getInstance();
-		drivetrain.init();		
+		drivetrain.init();	
+		
+		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+    	session1 = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+//    	session2 = NIVision.IMAQdxOpenCamera("cam2", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+    	
+//    	currSession = session1;
+    	NIVision.IMAQdxConfigureGrab(session1);
+    	
+    	
+    	
 		
 		//define autonomous chooser
         chooser = new SendableChooser();
@@ -122,5 +136,25 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+    }
+    
+    @SuppressWarnings("unused")
+	public void operationControl(){
+    	if(false){
+    		if(currSession == session1){
+        		NIVision.IMAQdxStopAcquisition(currSession);
+        		currSession = session2;
+        		NIVision.IMAQdxConfigureGrab(currSession);
+        	}else if(currSession == session2){
+        		NIVision.IMAQdxStopAcquisition(currSession);
+        		currSession = session1;
+        		NIVision.IMAQdxConfigureGrab(currSession);
+        	}
+    	}
+    	
+    	NIVision.IMAQdxGrab(currSession, frame, 1);
+    	CameraServer.getInstance().setImage(frame);
+    	
+    	
     }
 }
