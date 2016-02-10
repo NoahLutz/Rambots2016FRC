@@ -25,12 +25,7 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
     public static Drivetrain drivetrain;
-
-    private int currSession;
-    private int session1;
-    private int session2;
-    private Image frame;
-    
+    public static CameraServer cameraServer;
     
     Command autonomousCommand;
     SendableChooser chooser;
@@ -50,17 +45,11 @@ public class Robot extends IterativeRobot {
 		oi = OI.getInstance();
 		oi.init();
 		drivetrain = Drivetrain.getInstance();
-		drivetrain.init();	
+		drivetrain.init();
 		
-		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-    	session1 = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-//    	session2 = NIVision.IMAQdxOpenCamera("cam2", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-    	
-//    	currSession = session1;
-    	NIVision.IMAQdxConfigureGrab(session1);
-    	
-    	
-    	
+		cameraServer = CameraServer.getInstance();
+		cameraServer.setQuality(50);
+		cameraServer.startAutomaticCapture("cam1");
 		
 		//define autonomous chooser
         chooser = new SendableChooser();
@@ -136,25 +125,5 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-    }
-    
-    @SuppressWarnings("unused")
-	public void operationControl(){
-    	if(false){
-    		if(currSession == session1){
-        		NIVision.IMAQdxStopAcquisition(currSession);
-        		currSession = session2;
-        		NIVision.IMAQdxConfigureGrab(currSession);
-        	}else if(currSession == session2){
-        		NIVision.IMAQdxStopAcquisition(currSession);
-        		currSession = session1;
-        		NIVision.IMAQdxConfigureGrab(currSession);
-        	}
-    	}
-    	
-    	NIVision.IMAQdxGrab(currSession, frame, 1);
-    	CameraServer.getInstance().setImage(frame);
-    	
-    	
     }
 }
