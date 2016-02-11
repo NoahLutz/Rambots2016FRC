@@ -1,6 +1,11 @@
 package org.usfirst.frc.team1350.robot;
 
+import org.usfirst.frc.team1350.robot.commands.ChangeCamera;
+
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -43,20 +48,35 @@ public class OI {
 		return instance;
 	}
 	
-	
 	private OI(){
 		Log.info("Initializing OI");
 	}
 	
-	
 	public Joystick leftStick;
 	public Joystick rightStick;
+	public Joystick controller;
+	
+	public Button cameraSwitchButton1;
+	public Button cameraSwitchButton2;
+	public Button cameraSwitchButton3;
+	public Button cameraSwitchButton4;
 	
 	//Initialize inputs
 	public void init(){
 		leftStick = new Joystick(RobotMap.JOYSTICK_LEFT);
 		rightStick = new Joystick(RobotMap.JOYSTICK_RIGHT);
+		controller = new Joystick(RobotMap.CONTROLLER);
+		
+		cameraSwitchButton1 = new JoystickButton(controller, RobotMap.CONT_CAM1);
+		cameraSwitchButton2 = new JoystickButton(controller, RobotMap.CONT_CAM2);
+		cameraSwitchButton3 = new JoystickButton(controller, RobotMap.CONT_CAM3);
+		cameraSwitchButton4 = new JoystickButton(controller, RobotMap.CONT_CAM4);
+		
+		cameraSwitchButton1.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA1));
+		cameraSwitchButton2.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA2));
+		cameraSwitchButton3.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA3));
+		cameraSwitchButton4.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA4));
+
 	}
-	
 }
 

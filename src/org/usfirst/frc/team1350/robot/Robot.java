@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1350.robot;
 
 import org.usfirst.frc.team1350.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team1350.robot.subsystems.RaspberryPi;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
     public static Drivetrain drivetrain;
     public static CameraServer cameraServer;
+    public static RaspberryPi raspi;
     
     Command autonomousCommand;
     SendableChooser chooser;
@@ -46,6 +48,8 @@ public class Robot extends IterativeRobot {
 		oi.init();
 		drivetrain = Drivetrain.getInstance();
 		drivetrain.init();
+		raspi = new RaspberryPi().getInstance();
+		raspi.init();
 		
 		cameraServer = CameraServer.getInstance();
 		cameraServer.setQuality(50);
