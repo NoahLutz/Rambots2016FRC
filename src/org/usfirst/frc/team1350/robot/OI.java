@@ -56,6 +56,9 @@ public class OI {
 	public Joystick rightStick;
 	public Joystick controller;
 	
+	public DigitalOutput camera1;
+	public DigitalOutput camera2;
+	
 	public Button cameraSwitchButton1;
 	public Button cameraSwitchButton2;
 	public Button cameraSwitchButton3;
@@ -65,17 +68,16 @@ public class OI {
 	public void init(){
 		leftStick = new Joystick(RobotMap.JOYSTICK_LEFT);
 		rightStick = new Joystick(RobotMap.JOYSTICK_RIGHT);
-		controller = new Joystick(RobotMap.CONTROLLER);
+//		controller = new Joystick(RobotMap.CONTROLLER);
 		
-		cameraSwitchButton1 = new JoystickButton(controller, RobotMap.CONT_CAM1);
-		cameraSwitchButton2 = new JoystickButton(controller, RobotMap.CONT_CAM2);
-		cameraSwitchButton3 = new JoystickButton(controller, RobotMap.CONT_CAM3);
-		cameraSwitchButton4 = new JoystickButton(controller, RobotMap.CONT_CAM4);
+		camera1 = new DigitalOutput(RobotMap.RPI_CAMERA_SET1);
+		camera2 = new DigitalOutput(RobotMap.RPI_CAMERA_SET2);
 		
-		cameraSwitchButton1.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA1));
-		cameraSwitchButton2.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA2));
-		cameraSwitchButton3.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA3));
-		cameraSwitchButton4.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA4));
+		cameraSwitchButton1 = new JoystickButton(rightStick, RobotMap.CONT_CAM1);
+		cameraSwitchButton2 = new JoystickButton(rightStick, RobotMap.CONT_CAM2);
+		
+		cameraSwitchButton1.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA_SET1));
+		cameraSwitchButton2.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA_SET2));
 
 	}
 }
