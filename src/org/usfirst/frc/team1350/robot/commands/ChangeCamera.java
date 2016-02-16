@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1350.robot.commands;
 
+import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -35,6 +36,7 @@ public class ChangeCamera extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	isSwitched = false;
+//    	Robot.raspi.turnOffCameras();
     }
 
     // Called when another command which requires one or more of the same
