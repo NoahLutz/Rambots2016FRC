@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1350.robot.subsystems;
 
+import org.usfirst.frc.team1350.robot.Log;
+import org.usfirst.frc.team1350.robot.Robot;
 import org.usfirst.frc.team1350.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
@@ -19,44 +21,30 @@ public class RaspberryPi extends Subsystem {
 		return instance;
 	}
 	
-    private DigitalOutput camera1;
-    private DigitalOutput camera2;
-    private DigitalOutput camera3;
-    private DigitalOutput camera4;
-    
-    
     public void init(){
-    	camera1 = new DigitalOutput(RobotMap.RPI_CAMERA1);
-    	camera2 = new DigitalOutput(RobotMap.RPI_CAMERA2);
-    	camera3 = new DigitalOutput(RobotMap.RPI_CAMERA3);
-    	camera4 = new DigitalOutput(RobotMap.RPI_CAMERA4);
+    	Log.info("Initalizing RPi");
     }
     
     public boolean switchToCamera(int camera){
     	turnOffCameras();
     	switch (camera){
-    	case RobotMap.RPI_CAMERA1:
-    		camera1.set(true);
+    	case RobotMap.RPI_CAMERA_SET1:
+    		Log.info("Switched to Camera1");
+    		Robot.oi.camera1.set(true);
+//    		Robot.oi.camera1.set(false);
     		break;
-    	case RobotMap.RPI_CAMERA2:
-    		camera2.set(true);
-    		break;
-    	case RobotMap.RPI_CAMERA3:
-    		camera3.set(true);
-    		break;
-    	case RobotMap.RPI_CAMERA4:
-    		camera4.set(true);
+    	case RobotMap.RPI_CAMERA_SET2:
+    		Log.info("Switched to Camera2");
+    		Robot.oi.camera2.set(true);
+//    		Robot.oi.camera2.set(false);
     		break;
     	}
     	return true;
     }
     
     public void turnOffCameras(){
-    	camera1.set(false);
-    	camera2.set(false);
-    	camera3.set(false);
-    	camera4.set(false);
-
+    	Robot.oi.camera1.set(false);
+    	Robot.oi.camera2.set(false);
     }
 
 
