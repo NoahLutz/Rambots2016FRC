@@ -44,12 +44,13 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	//Initilaze subsystems and oi
+    	raspi = new RaspberryPi().getInstance();
+		raspi.init();
 		oi = OI.getInstance();
 		oi.init();
 		drivetrain = Drivetrain.getInstance();
 		drivetrain.init();
-		raspi = new RaspberryPi().getInstance();
-		raspi.init();
+		
 		
 		cameraServer = CameraServer.getInstance();
 		cameraServer.setQuality(50);
@@ -68,7 +69,7 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
+    	raspi.turnOffCameras();
     }
 	
 	public void disabledPeriodic() {
