@@ -36,17 +36,13 @@ public class RobotMap {
 	public static final int ULTRASONIC_PING = 8;
 	public static final int ULTRASONIC_ECHO = 9;
 	
-	public static final int RPI_CAMERA1 = 3;
-	public static final int RPI_CAMERA2 = 4;
-	public static final int RPI_CAMERA3 = 5;
-	public static final int RPI_CAMERA4 = 6;
-	
+	public static final int RPI_CAMERA_SET1 = 0;
+	public static final int RPI_CAMERA_SET2 = 1;
 	
 	//Controller 
-	public static final int CONT_CAM1 = 0;
-	public static final int CONT_CAM2 = 1;
-	public static final int CONT_CAM3 = 2;
-	public static final int CONT_CAM4 = 3;
+	public static final int CONT_CAM1 = 2;
+	public static final int CONT_CAM2 = 3;
+	
 
 	
 	
