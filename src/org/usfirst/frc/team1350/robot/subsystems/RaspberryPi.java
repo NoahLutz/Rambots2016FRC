@@ -23,6 +23,7 @@ public class RaspberryPi extends Subsystem {
 	
     public void init(){
     	Log.info("Initalizing RPi");
+//    	Robot.oi.camera1.set(true);
     }
     
     public boolean switchToCamera(int camera){
@@ -31,12 +32,10 @@ public class RaspberryPi extends Subsystem {
     	case RobotMap.RPI_CAMERA_SET1:
     		Log.info("Switched to Camera1");
     		Robot.oi.camera1.set(true);
-//    		Robot.oi.camera1.set(false);
     		break;
     	case RobotMap.RPI_CAMERA_SET2:
     		Log.info("Switched to Camera2");
     		Robot.oi.camera2.set(true);
-//    		Robot.oi.camera2.set(false);
     		break;
     	}
     	return true;
