@@ -26,8 +26,9 @@ public class RobotMap {
 	public static final int SHOOTER_LEFT_MOTOR_CONTROLLER = 2;
 	public static final int SHOOTER_RIGHT_MOTOR_CONTROLLER = 3;
 	
-	public static final int SHOOTER_TILT_LEFT_MOTOR_CONTROLLER = 4;
-	public static final int SHOOTER_TILT_RIGHT_MOTOR_CONTROLLER = 5;
+	public static final int SHOOTER_TILT_LEFT_ACTUATOR = 4;
+	public static final int SHOOTER_TILT_RIGHT_ACTUATOR = 5;
+	public static final int SHOOTER_BALL_ACTUATOR = 6;
 	
 	public static final int ULTRASONIC_ECHO_PULSE_OUTPUT = 6;
 	public static final int ULTRASONIC_TRIGGER_PULSE_INPUT = 7;
