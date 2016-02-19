@@ -36,7 +36,6 @@ public class ChangeCamera extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	isSwitched = false;
-//    	Robot.raspi.turnOffCameras();
     }
 
     // Called when another command which requires one or more of the same
