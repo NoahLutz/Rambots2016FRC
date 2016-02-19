@@ -22,7 +22,7 @@ public class ReverseShooterMotors extends RunShooterMotors {
 
 	@Override
 	protected boolean isFinished() {
-		return !(shooter.ballIsInShooter());
+		return (shooter.ballIsInShooter());
 	}
 
     
