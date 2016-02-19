@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FindShooterHome extends Command {
+public class IntakeBall extends Command {
 
-    public FindShooterHome() {
+    public IntakeBall() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.shooter);
@@ -18,22 +18,23 @@ public class FindShooterHome extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Log.info("Initializing FindShooterHome");
+    	Log.info("Initalizing IntakeBall");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.runTiltMotors(.25, Robot.shooter.REVERSE);
+    	//TODO: set tilt to bottom
+    	Robot.shooter.runShooterMotor(1, Robot.shooter.REVERSE);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.oi.isShooterLimitHit();
+        return Robot.shooter.ballIsInShooter();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.stopTiltMotors();
+    	Robot.shooter.stopShooterMotors();
     }
 
     // Called when another command which requires one or more of the same
