@@ -2,6 +2,8 @@
 package org.usfirst.frc.team1350.robot;
 
 import org.usfirst.frc.team1350.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team1350.robot.subsystems.RangeFinder;
+import org.usfirst.frc.team1350.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -22,12 +24,12 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
     public static Drivetrain drivetrain;
+    public static Shooter shooter;
+    public static RangeFinder rangeFinder;
     public CameraServer camera;
-
     
     Command autonomousCommand;
     SendableChooser chooser;
-    
     
     public Robot(){
     	//start camera server and start auto capture
@@ -35,7 +37,6 @@ public class Robot extends IterativeRobot {
     	camera.setQuality(50);
 		camera.startAutomaticCapture("cam1");
     }
-    
 
     /**
      * This function is run when the robot is first started up and should be
@@ -46,7 +47,11 @@ public class Robot extends IterativeRobot {
 		oi = OI.getInstance();
 		oi.init();
 		drivetrain = Drivetrain.getInstance();
-		drivetrain.init();		
+		drivetrain.init();	
+		shooter = Shooter.getInstance();
+		shooter.init();
+		rangeFinder = RangeFinder.getInstance();
+		rangeFinder.init();
 		
 		//define autonomous chooser
         chooser = new SendableChooser();
@@ -61,7 +66,7 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
+    	shooter.stopShooterMotors();
     }
 	
 	public void disabledPeriodic() {
