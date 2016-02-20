@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1350.robot.commands;
 
 import org.usfirst.frc.team1350.robot.Log;
+import org.usfirst.frc.team1350.robot.Robot;
 import org.usfirst.frc.team1350.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ForwardShooterMotors extends RunShooterMotors {
+public class ForwardShooterMotors extends AbstractShooterInstance {
 
 	@Override
 	protected void initialize() {
@@ -22,7 +23,6 @@ public class ForwardShooterMotors extends RunShooterMotors {
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return !(shooter.ballIsInShooter());
 	}
 

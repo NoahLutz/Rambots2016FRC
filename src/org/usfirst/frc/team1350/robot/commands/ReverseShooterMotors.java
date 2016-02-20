@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ReverseShooterMotors extends RunShooterMotors {
+public class ReverseShooterMotors extends AbstractShooterInstance {
 
 	@Override
 	protected void initialize() {

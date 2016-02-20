@@ -2,8 +2,7 @@ package org.usfirst.frc.team1350.robot.subsystems;
 
 import org.usfirst.frc.team1350.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -27,31 +26,40 @@ public class Shooter extends Subsystem {
 	public static final boolean FORWARD = true;
 	public static final boolean REVERSE = false;
 	
-	private Victor leftLauncherMotorController;
-	private Victor rightLauncherMotorController;
+	private Victor shooterMotors;
 	
-	private Servo tiltActuator;
-	private Servo ballActuator;
+	private PWM tiltActuator;
+	private PWM ballActuator;
+	
 	
 	//TODO: some sort of sensor for detecting if the ball is in the shooter
 	
-	private static double launcherTilt;
-	
 	public void init(){
-		launcherTilt = 0;
-		leftLauncherMotorController = new Victor(RobotMap.SHOOTER_LEFT_MOTOR_CONTROLLER);
-		rightLauncherMotorController = new Victor(RobotMap.SHOOTER_RIGHT_MOTOR_CONTROLLER);
+		shooterMotors = new Victor(RobotMap.SHOOTER_MOTORS);
 		
-		tiltActuator = new Servo(RobotMap.SHOOTER_TILT_LEFT_ACTUATOR);
-		ballActuator = new Servo(RobotMap.SHOOTER_BALL_ACTUATOR);
+		tiltActuator = new PWM(RobotMap.SHOOTER_TILT_LEFT_ACTUATOR);
+		ballActuator = new PWM(RobotMap.SHOOTER_BALL_ACTUATOR);
+		
 	}
 	
-	public double getAngle(){
-		return tiltActuator.getAngle();
+	public int getCurrentRawTiltPWM(){
+		return tiltActuator.getRaw();
+	}
+
+	public void setRawTiltPWM(int value){
+		//252 for fully extended 
+		//127 for fully retracted
+		tiltActuator.setRaw(value);
 	}
 	
-	public void setAngle(double angle){
-		tiltActuator.setAngle(angle);
+	public int getCurrentRawBallPWM(){
+		return ballActuator.getRaw();
+	}
+	
+	public void setRawBallPWM(int value){
+		//252 for fully extended 
+		//127 for fully retracted
+		ballActuator.setRaw(value);
 	}
 	
 	//if direction is set to false, it will run in reverse
@@ -61,13 +69,11 @@ public class Shooter extends Subsystem {
 			speed = -(speed);
 		}
 		
-		leftLauncherMotorController.set(speed);
-		rightLauncherMotorController.set(speed);
+		shooterMotors.set(speed);
 	}
 	
 	public void stopShooterMotors(){
-		leftLauncherMotorController.set(0.0);
-		rightLauncherMotorController.set(0.0);
+		shooterMotors.set(0.0);
 	}
 	
 	public boolean ballIsInShooter(){

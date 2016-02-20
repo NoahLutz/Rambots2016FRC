@@ -27,11 +27,9 @@ public class Robot extends IterativeRobot {
     public static Shooter shooter;
     public static RangeFinder rangeFinder;
     public CameraServer camera;
-
     
     Command autonomousCommand;
     SendableChooser chooser;
-    
     
     public Robot(){
     	//start camera server and start auto capture
@@ -39,7 +37,6 @@ public class Robot extends IterativeRobot {
     	camera.setQuality(50);
 		camera.startAutomaticCapture("cam2");
     }
-    
 
     /**
      * This function is run when the robot is first started up and should be
@@ -69,7 +66,7 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
+    	shooter.stopShooterMotors();
     }
 	
 	public void disabledPeriodic() {
