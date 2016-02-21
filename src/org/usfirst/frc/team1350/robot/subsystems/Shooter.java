@@ -1,12 +1,17 @@
 package org.usfirst.frc.team1350.robot.subsystems;
 
+import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.OI;
 import org.usfirst.frc.team1350.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -33,14 +38,16 @@ public class Shooter extends Subsystem {
 	
 	// TODO adjust
 	public static final int TILT_SHOOT_PWM=1;
-	public static final int TILT_HOME_PWM=235;
+	public static final int TILT_HOME_PWM=255;
 	
-	public static final float TILT_HOME_VOLTAGE=3.2f;
 	public static final float TILT_HOME_POSITION_PRECISION=0.1f;
 
-	private Victor shooterMotors;
+	private VictorSP shooterMotors;
 	
 	private PWM tiltActuator;
+	private DigitalOutput tiltDigitalActuator;
+	private AnalogOutput tiltAnalogActuator;
+	private Servo servo;
 	private AnalogInput tiltActuatorFeedback;
 	
 	private PWM ballActuator;
@@ -50,10 +57,19 @@ public class Shooter extends Subsystem {
 	
 	//TODO: some sort of sensor for detecting if the ball is in the shooter
 	
+	public Shooter() {
+		init();
+	}
+	
 	public void init(){
 		oi = OI.getInstance();
 		
-		tiltActuator = new PWM(RobotMap.SHOOTER_TILT);
+//		tiltActuator = new PWM(RobotMap.SHOOTER_TILT);
+//		Log.info("Setting Position to 255");
+		tiltDigitalActuator = new DigitalOutput(RobotMap.SHOOTER_TILT);
+		tiltDigitalActuator.enablePWM(0);
+		tiltDigitalActuator.setPWMRate(1000);
+		
 		tiltActuatorFeedback = new AnalogInput(RobotMap.SHOOTER_TILT_FEEDBACK);
 		
 		ballActuator = new PWM(RobotMap.SHOOTER_BALL_ACTUATOR);
@@ -62,6 +78,7 @@ public class Shooter extends Subsystem {
 		ballSwitch = new DigitalInput(RobotMap.SHOOTER_BALL_SWITCH);
 		
 		shooterMotors = new VictorSP(RobotMap.SHOOTER_MOTORS);
+		Log.info("Exiting Shooter.init");
 	}
 	
 	public int getCurrentRawTiltPWM(){
@@ -114,6 +131,24 @@ public class Shooter extends Subsystem {
     	return instance.tiltActuator;
     }
     
+    public static DigitalOutput getTiltDigital() {
+    	Shooter instance = Shooter.getInstance();
+    	
+    	return instance.tiltDigitalActuator;
+    }
+    
+    public static AnalogOutput getTiltAnalog() {
+    	Shooter instance = Shooter.getInstance();
+    	
+    	return instance.tiltAnalogActuator;
+    }
+    
+    public static Servo getTiltServo() {
+    	Shooter instance = Shooter.getInstance();
+    	
+    	return instance.servo;
+    }
+    
     public static AnalogInput getTiltFeedback() {
     	Shooter instance = Shooter.getInstance();
     	
@@ -121,7 +156,9 @@ public class Shooter extends Subsystem {
     }
     
     public static PWM getBallPWM() {
+    	Log.info("Called GetBallPWM");
     	Shooter instance = Shooter.getInstance();
+    	Log.info("PWM: " + instance.ballActuator);
     	
     	return instance.ballActuator;
     }

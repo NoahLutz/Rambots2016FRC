@@ -16,6 +16,7 @@ public class IntakeBall extends Command {
 	private static final float REVERSE_SHOOTER_TIMEOUT = 10;
 	
 	public IntakeBall(float intakeSpeed) {
+		Log.info("New IntakeBalls");
 		setTimeout(REVERSE_SHOOTER_TIMEOUT);
 		
 		speed = intakeSpeed;
@@ -29,12 +30,15 @@ public class IntakeBall extends Command {
 
 	@Override
 	protected void execute() {
+		Log.info("Execute run shooter motor");
+		// TODO FLIP shooter forward 
 		shooter.runShooterMotor(speed, Shooter.REVERSE);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return (shooter.ballIsInShooter());
+		// TODO invert the method name
+		return (!shooter.ballIsInShooter());
 	}
 
 	@Override

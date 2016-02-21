@@ -49,9 +49,8 @@ public class Robot extends IterativeRobot {
 		drivetrain = Drivetrain.getInstance();
 		drivetrain.init();	
 		shooter = Shooter.getInstance();
-		shooter.init();
-		rangeFinder = RangeFinder.getInstance();
-		rangeFinder.init();
+//		rangeFinder = RangeFinder.getInstance();
+//		rangeFinder.init();
 		
 		//define autonomous chooser
         chooser = new SendableChooser();

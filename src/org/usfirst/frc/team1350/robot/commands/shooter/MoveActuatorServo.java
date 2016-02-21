@@ -5,19 +5,23 @@ import org.usfirst.frc.team1350.robot.subsystems.Shooter;
 import org.usfirst.frc.team1350.robot.utils.Utils;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogOutput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MoveActuator extends Command {
+public class MoveActuatorServo extends Command {
 	
-	private PWM actuator;
+	private Servo actuator;
 	private AnalogInput actuatorFeedback;
 
 	private int requestedPosition;
 	private float positionVoltage;
 	private float precision = 0.25f;
+	private float dutyCycle;
 		
-    public MoveActuator(PWM acutatorPWM, AnalogInput acutatorFeedback, int requestedPosition, float timeout) {	
+    public MoveActuatorServo(Servo acutator, AnalogInput acutatorFeedback, int requestedPosition, float timeout) {	
     	setTimeout(timeout);
     	Log.info("New MoveActuator");
     	this.requestedPosition = requestedPosition;
@@ -25,8 +29,9 @@ public class MoveActuator extends Command {
     	
     	// calculate positionVoltage by range mapping 0-255 to 0-3.3
     	positionVoltage = Utils.remap(requestedPosition, 0f, 255f, 0, 3.3f);
+    	dutyCycle = Utils.remap(requestedPosition, 0, 255, 0, 5);
     	
-    	actuator = acutatorPWM;
+    	this.actuator = acutator;
     	// TODO maybe remove
     	requires(Shooter.getInstance());
     }
@@ -34,15 +39,19 @@ public class MoveActuator extends Command {
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
+		
 	
 	}
 
 	@Override
 	protected void execute() {
-		Log.info("MoveActuator execute: " + requestedPosition);
-		Log.info("PWM Channel: " + actuator.getChannel());
-		Log.info("Position: " + actuator.getRaw());
-    	actuator.setRaw(requestedPosition);
+		Log.info("Analog MoveActuator execute: " + actuator.get());
+		actuator.set(1);
+		//Log.info("Position: " + actuator.get);
+    	///actuator.actuator.setRaw(requestedPosition);
+//		actuator.setPWMRate(1);
+//		actuator.set(true);
+//		actuator.updateDutyCycle(1);
 	}
 
 	@Override
@@ -65,7 +74,7 @@ public class MoveActuator extends Command {
 	@Override
 	protected void end() {
 		// Stop actuator position
-		actuator.setRaw(0);		
+		//actuator.setVoltage(0);
 	}
 
 	@Override
