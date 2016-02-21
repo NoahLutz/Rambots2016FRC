@@ -61,7 +61,7 @@ public class Shooter extends Subsystem {
 		
 		ballSwitch = new DigitalInput(RobotMap.SHOOTER_BALL_SWITCH);
 		
-		shooterMotors = new Victor(RobotMap.SHOOTER_MOTORS);
+		shooterMotors = new VictorSP(RobotMap.SHOOTER_MOTORS);
 	}
 	
 	public int getCurrentRawTiltPWM(){
