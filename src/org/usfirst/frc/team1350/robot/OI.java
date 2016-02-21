@@ -1,11 +1,15 @@
 package org.usfirst.frc.team1350.robot;
 
-import org.usfirst.frc.team1350.robot.commands.ForwardShooterMotors;
-import org.usfirst.frc.team1350.robot.commands.ReverseShooterMotors;
+import org.usfirst.frc.team1350.robot.commands.shooter.AimAndShoot;
+import org.usfirst.frc.team1350.robot.commands.shooter.IntakeBall;
+import org.usfirst.frc.team1350.robot.commands.shooter.IntakeBallGroup;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -29,13 +33,12 @@ public class OI {
 	public Joystick leftStick;
 	public Joystick rightStick;
 	
-	public JoystickButton motorForward;
-	public JoystickButton motorReverse;
-	public JoystickButton cancel;
+	public JoystickButton intakeBallButton;
+	public JoystickButton shootBallButton;
 	
 	public AnalogInput tiltActuatorFeedback;
 	public AnalogInput ballActuatorFeedback;
-	
+		
 	public DigitalInput ballSwitch;
 	
 	//Initialize inputs
@@ -43,31 +46,11 @@ public class OI {
 		leftStick = new Joystick(RobotMap.JOYSTICK_LEFT);
 		rightStick = new Joystick(RobotMap.JOYSTICK_RIGHT);
 		
-		motorForward = new JoystickButton(rightStick, RobotMap.CONT_FIRE_BUTTON);
-		motorReverse = new JoystickButton(rightStick, RobotMap.CONT_REV_BUTTON);
-		cancel = new JoystickButton(leftStick, RobotMap.CONT_CANCEL);
-		
-		tiltActuatorFeedback = new AnalogInput(RobotMap.SHOOTER_TILT_FEEDBACK);
-		ballActuatorFeedback = new AnalogInput(RobotMap.SHOOTER_BALL_FEEDBACK);
-		
-		ballSwitch = new DigitalInput(RobotMap.SHOOTER_BALL_SWITCH);
-		
-//		motorForward.whenPressed(new ForwardShooterMotors());
-//		motorReverse.whenPressed(new ReverseShooterMotors());
-		
-		motorForward.whenPressed(new ForwardShooterMotors());
-	}
-	
-	public double getTiltFeedbackVoltage(){
-		return tiltActuatorFeedback.getVoltage();
-	}
-	
-	public double getBallFeedbackVoltage(){
-		return ballActuatorFeedback.getVoltage();
-	}
-	
-	public boolean ballIsInShooter(){
-		return ballSwitch.get();
+		intakeBallButton = new JoystickButton(leftStick, RobotMap.CONT_FIRE_BUTTON);
+		shootBallButton = new JoystickButton(rightStick, RobotMap.CONT_FIRE_BUTTON);
+				
+		intakeBallButton.whenPressed(new IntakeBallGroup());
+		shootBallButton.whenPressed(new AimAndShoot());
 	}
 }
 

@@ -1,7 +1,8 @@
 package org.usfirst.frc.team1350.robot.commands;
 
 import org.usfirst.frc.team1350.robot.Log;
-import org.usfirst.frc.team1350.robot.Robot;
+import org.usfirst.frc.team1350.robot.OI;
+import org.usfirst.frc.team1350.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -30,20 +31,19 @@ public class TeleOpTankDrive extends Command {
     	super("TeleOpTankDrive");
     	
     	//define required subsystems
-    	requires(Robot.drivetrain);
+    	requires(Drivetrain.getInstance());
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Log.info("Initializing TeleOpTankDrive");
     	
-    	
-    	squaredInputs = true;
+    	squaredInputs = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.tankDrive(getLeftStick(), getRightStick(), squaredInputs);
+    	Drivetrain.getInstance().tankDrive(getLeftStick(), getRightStick(), squaredInputs);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -61,12 +61,10 @@ public class TeleOpTankDrive extends Command {
     }
     
     private static double getLeftStick(){
-    	//TODO:get left stick 
-    	return (Robot.oi.leftStick.getY()) * speed;
+    	return (OI.getInstance().leftStick.getY()) * speed;
     }
     
     private static double getRightStick(){
-    	//TODO:get right stick
-    	return (Robot.oi.rightStick.getY()) * speed;
+    	return (OI.getInstance().rightStick.getY()) * speed;
     }
 }

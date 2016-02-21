@@ -25,19 +25,19 @@ public class RobotMap {
 	
 	public static final int SHOOTER_MOTORS = 2;
 	
-	public static final int SHOOTER_TILT_LEFT_ACTUATOR = 4;
-	public static final int SHOOTER_TILT_RIGHT_ACTUATOR = 5;
 	public static final int SHOOTER_BALL_ACTUATOR = 6;
+	public static final int SHOOTER_BALL_FEEDBACK = 7;
 	
+	// TODO fix channels
+	public static final int SHOOTER_TILT = 3;
+	public static final int SHOOTER_TILT_FEEDBACK = 1;
+
 	public static final int ULTRASONIC_ECHO_PULSE_OUTPUT = 6;
 	public static final int ULTRASONIC_TRIGGER_PULSE_INPUT = 7;
 	
 	public static final int ULTRASONIC_PING = 8;
 	public static final int ULTRASONIC_ECHO = 9;
 	
-	//Analog
-	public static final int SHOOTER_TILT_FEEDBACK = 0;
-	public static final int SHOOTER_BALL_FEEDBACK = 1;
 	
 	//Digital 
 	public static final int SHOOTER_BALL_SWITCH = 2;
