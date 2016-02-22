@@ -12,18 +12,19 @@ import edu.wpi.first.wpilibj.Servo;
 /**
  *
  */
-public class ShooterHome extends MoveActuatorDigital {
+public class ShooterHome extends MoveActuatorServo {
 	
 	//private static PWM shooterTiltPWM = Shooter.getTiltPWM();
-	private static DigitalOutput shooterTiltDigital = Shooter.getTiltDigital();
+//	private static DigitalOutput shooterTiltDigital = Shooter.getTiltDigital();
 	//private static AnalogOutput shooterTiltAnalog = Shooter.getTiltAnalog();
 	//private static Servo shooterServo = Shooter.getTiltServo();
+	private static Actuator actuator = Shooter.getTiltServo();
 	private static AnalogInput shooterTiltFeedback = Shooter.getTiltFeedback();
 	private static int homePosition = Shooter.TILT_HOME_PWM;
 	private static float timeout = 4f;
 	
     public ShooterHome() {
-    	super(shooterTiltDigital, shooterTiltFeedback, homePosition, timeout);
+    	super(actuator, shooterTiltFeedback, homePosition, timeout);
     	Log.info("New ShooterHomeAnalog");
     }
 

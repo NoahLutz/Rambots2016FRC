@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveActuatorServo extends Command {
 	
-	private Servo actuator;
+	private Actuator actuator;
 	private AnalogInput actuatorFeedback;
 
 	private int requestedPosition;
@@ -21,14 +21,14 @@ public class MoveActuatorServo extends Command {
 	private float precision = 0.25f;
 	private float dutyCycle;
 		
-    public MoveActuatorServo(Servo acutator, AnalogInput acutatorFeedback, int requestedPosition, float timeout) {	
+    public MoveActuatorServo(Actuator acutator, AnalogInput acutatorFeedback, int requestedPosition, float timeout) {	
     	setTimeout(timeout);
     	Log.info("New MoveActuator");
     	this.requestedPosition = requestedPosition;
     	this.actuatorFeedback = acutatorFeedback;
     	
     	// calculate positionVoltage by range mapping 0-255 to 0-3.3
-    	positionVoltage = Utils.remap(requestedPosition, 0f, 255f, 0, 3.3f);
+    	positionVoltage = Utils.remap(requestedPosition, 0f, 255f, 3.3f, 0);
     	dutyCycle = Utils.remap(requestedPosition, 0, 255, 0, 5);
     	
     	this.actuator = acutator;
@@ -46,12 +46,9 @@ public class MoveActuatorServo extends Command {
 	@Override
 	protected void execute() {
 		Log.info("Analog MoveActuator execute: " + actuator.get());
-		actuator.set(1);
-		//Log.info("Position: " + actuator.get);
-    	///actuator.actuator.setRaw(requestedPosition);
-//		actuator.setPWMRate(1);
-//		actuator.set(true);
-//		actuator.updateDutyCycle(1);
+		actuator.setRaw(1);
+		//actuator.setPosition(1);
+		Log.info("Position: " + actuator.getRaw());
 	}
 
 	@Override
@@ -60,7 +57,7 @@ public class MoveActuatorServo extends Command {
 		// TODO send positionVoltage here not requestedPosition
     	boolean isHome = isPositioned(positionVoltage);
     	Log.info("MoveActuator isFinished, isHome?: " + isHome);
-    	return isHome;
+    	return false;
 	}
 	
 	protected boolean isPositioned(float requestedVoltage) {

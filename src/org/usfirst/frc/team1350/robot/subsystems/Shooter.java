@@ -3,6 +3,7 @@ package org.usfirst.frc.team1350.robot.subsystems;
 import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.OI;
 import org.usfirst.frc.team1350.robot.RobotMap;
+import org.usfirst.frc.team1350.robot.commands.shooter.Actuator;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogOutput;
@@ -47,7 +48,7 @@ public class Shooter extends Subsystem {
 	private PWM tiltActuator;
 	private DigitalOutput tiltDigitalActuator;
 	private AnalogOutput tiltAnalogActuator;
-	private Servo servo;
+	private Actuator tiltActuatorServo;
 	private AnalogInput tiltActuatorFeedback;
 	
 	private PWM ballActuator;
@@ -64,11 +65,12 @@ public class Shooter extends Subsystem {
 	public void init(){
 		oi = OI.getInstance();
 		
-//		tiltActuator = new PWM(RobotMap.SHOOTER_TILT);
+		//tiltActuator = new PWM(RobotMap.SHOOTER_TILT);
 //		Log.info("Setting Position to 255");
-		tiltDigitalActuator = new DigitalOutput(RobotMap.SHOOTER_TILT);
-		tiltDigitalActuator.enablePWM(0);
-		tiltDigitalActuator.setPWMRate(1000);
+//		tiltDigitalActuator = new DigitalOutput(RobotMap.SHOOTER_TILT);
+//		tiltDigitalActuator.enablePWM(0);
+//		tiltDigitalActuator.setPWMRate(1000);
+		tiltActuatorServo = new Actuator(RobotMap.SHOOTER_TILT);
 		
 		tiltActuatorFeedback = new AnalogInput(RobotMap.SHOOTER_TILT_FEEDBACK);
 		
@@ -143,10 +145,10 @@ public class Shooter extends Subsystem {
     	return instance.tiltAnalogActuator;
     }
     
-    public static Servo getTiltServo() {
+    public static Actuator getTiltServo() {
     	Shooter instance = Shooter.getInstance();
     	
-    	return instance.servo;
+    	return instance.tiltActuatorServo;
     }
     
     public static AnalogInput getTiltFeedback() {

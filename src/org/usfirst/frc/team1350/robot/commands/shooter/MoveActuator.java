@@ -24,7 +24,7 @@ public class MoveActuator extends Command {
     	this.actuatorFeedback = acutatorFeedback;
     	
     	// calculate positionVoltage by range mapping 0-255 to 0-3.3
-    	positionVoltage = Utils.remap(requestedPosition, 0f, 255f, 0, 3.3f);
+    	positionVoltage = Utils.remap(requestedPosition, 0f, 255f, 3.3f, 0);
     	
     	actuator = acutatorPWM;
     	// TODO maybe remove

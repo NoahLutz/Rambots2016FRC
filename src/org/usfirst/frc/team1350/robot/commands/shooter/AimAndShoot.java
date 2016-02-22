@@ -13,8 +13,10 @@ public class AimAndShoot extends CommandGroup {
 	
 	public AimAndShoot() {
 		//addSequential(new SetShooterToHigh());
-		addSequential(new RampAndShootBallGroup(shootSpeed, rampUpDelay, rampDownDelay));
+		//addSequential(new RampAndShootBallGroup(shootSpeed, rampUpDelay, rampDownDelay));
 		//addSequential(new RetractBallActuator());
+		
+		addSequential(new ShootBall(shootSpeed, 1d));
 	
 	}
 	
