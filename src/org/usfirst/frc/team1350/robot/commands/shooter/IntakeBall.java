@@ -21,6 +21,8 @@ public class IntakeBall extends Command {
 		
 		speed = intakeSpeed;
 		shooter = Shooter.getInstance();
+		
+		requires(shooter);
 	}
 
 	@Override
@@ -31,7 +33,6 @@ public class IntakeBall extends Command {
 	@Override
 	protected void execute() {
 		Log.info("Execute run shooter motor");
-		// TODO FLIP shooter forward 
 		shooter.runShooterMotor(speed, Shooter.REVERSE);
 	}
 

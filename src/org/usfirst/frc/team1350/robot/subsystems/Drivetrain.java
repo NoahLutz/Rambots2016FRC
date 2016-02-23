@@ -5,14 +5,13 @@ import org.usfirst.frc.team1350.robot.RobotMap;
 import org.usfirst.frc.team1350.robot.commands.TeleOpTankDrive;
 
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class Drivetrain extends Subsystem {
-	
 	
 	//Singleton
 	private static Drivetrain instance;
@@ -23,23 +22,19 @@ public class Drivetrain extends Subsystem {
 		return instance;
 	}
     
-    
-	private Victor leftMotorController;
-	private Victor rightMotorController;
+	private VictorSP leftMotorController;
+	private VictorSP rightMotorController;
 	private RobotDrive robotDrive;
 	private TeleOpTankDrive tankDrive;
 	
 	public Drivetrain(){
-		Log.info("Initializing Drivetrain subsystem");
+		Log.info("Creating Drivetrain subsystem");
 	}
 
-	// Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	
 	public void init(){
 		tankDrive =TeleOpTankDrive.getInstance();
-		leftMotorController = new Victor(RobotMap.DRIVE_TRAIN_LEFT_MOTOR_CONTROLLER);
-		rightMotorController = new Victor(RobotMap.DRIVE_TRAIN_RIGHT_MOTOR_CONTROLLER);
+		leftMotorController = new VictorSP(RobotMap.DRIVE_TRAIN_LEFT_MOTOR_CONTROLLER);
+		rightMotorController = new VictorSP(RobotMap.DRIVE_TRAIN_RIGHT_MOTOR_CONTROLLER);
 		robotDrive = new RobotDrive(leftMotorController, rightMotorController);
 	}
 	
@@ -51,10 +46,7 @@ public class Drivetrain extends Subsystem {
 		robotDrive.drive(speed, curve);
 	}
 	
-	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     	setDefaultCommand(tankDrive);
     }
 }

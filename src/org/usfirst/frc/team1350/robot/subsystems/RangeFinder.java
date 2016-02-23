@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1350.robot.subsystems;
 
-import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -26,7 +25,7 @@ public class RangeFinder extends Subsystem {
 	private Ultrasonic sensor;
 	
 	public RangeFinder(){
-		Log.info("Initializing RangeFinder");
+		super();
 	}
 	
 	public void init(){

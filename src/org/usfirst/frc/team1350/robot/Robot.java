@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1350.robot;
 
 import org.usfirst.frc.team1350.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team1350.robot.subsystems.Lifter;
 import org.usfirst.frc.team1350.robot.subsystems.RangeFinder;
 import org.usfirst.frc.team1350.robot.subsystems.Shooter;
 
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
     public static Drivetrain drivetrain;
     public static Shooter shooter;
+    public static Lifter lifter;
     public static RangeFinder rangeFinder;
     public CameraServer camera;
     
@@ -49,6 +51,9 @@ public class Robot extends IterativeRobot {
 		drivetrain = Drivetrain.getInstance();
 		drivetrain.init();	
 		shooter = Shooter.getInstance();
+		shooter.init();
+		lifter = Lifter.getInstance();
+		lifter.init();
 //		rangeFinder = RangeFinder.getInstance();
 //		rangeFinder.init();
 		

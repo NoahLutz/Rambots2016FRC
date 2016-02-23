@@ -2,19 +2,41 @@ package org.usfirst.frc.team1350.robot.commands.shooter;
 
 import org.usfirst.frc.team1350.robot.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.command.Command;
 
-public class SetShooterToHigh extends MoveActuator {
+public class SetShooterToHigh extends Command{
 
-	private static PWM shooterTiltPWM = Shooter.getTiltPWM();
-	private static AnalogInput shooterTiltFeedback = Shooter.getTiltFeedback();
-	private static int highPosition = Shooter.TILT_SHOOT_PWM;
-	private static float timeout = 4f;
+	private Shooter shooter;
+	private final double SPEED = .25d;
 	
-	public SetShooterToHigh() {
-		super(shooterTiltPWM, shooterTiltFeedback, highPosition, timeout);
+	public SetShooterToHigh(){
+		shooter = Shooter.getInstance();
+		requires(shooter);
 	}
 	
+	@Override
+	protected void initialize() {
+	}
+
+	@Override
+	protected void execute() {
+		shooter.runTiltMotors(SPEED, Shooter.FORWARD);
+	}
+
+	@Override
+	protected boolean isFinished() {
+		return shooter.topLimitIsHit();
+	}
+
+	@Override
+	protected void end() {
+		shooter.stopTiltMotors();
+	}
+
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

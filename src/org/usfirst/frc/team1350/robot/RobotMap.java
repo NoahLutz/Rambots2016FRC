@@ -23,23 +23,27 @@ public class RobotMap {
 	public static final int JOYSTICK_LEFT = 0;
 	public static final int JOYSTICK_RIGHT = 1; 
 	
-	public static final int SHOOTER_MOTORS = 7;
-	
-	public static final int SHOOTER_BALL_ACTUATOR = 8;
-	public static final int SHOOTER_BALL_FEEDBACK = 2;
-	
-	public static final int SHOOTER_TILT = 6;
-	public static final int SHOOTER_TILT_FEEDBACK = 3;
+	//TODO Adjust
+	public static final int SHOOTER_MOTORS = 7;	
+	public static final int SHOOTER_TILT_MOTOR = 6;
+	public static final int SHOOTER_BOTTOM_LIMIT = 3;
+	public static final int SHOOTER_TOP_LIMIT = 6;
+	public static final int SHOOTER_ENCODERA = 4;
+	public static final int SHOOTER_ENCODERB = 5;
 
 	public static final int ULTRASONIC_ECHO_PULSE_OUTPUT = 6;
 	public static final int ULTRASONIC_TRIGGER_PULSE_INPUT = 7;
-	
 	public static final int ULTRASONIC_PING = 8;
 	public static final int ULTRASONIC_ECHO = 9;
 	
 	
+	public static final int LIFTER_MOTOR = 6;
+	public static final int LIFTER_TOP_LIMIT = 7;
+	public static final int LIFTER_BOTTOM_LIMIT = 8;
+	
+	
 	//Digital 
-	public static final int SHOOTER_BALL_SWITCH = 2;
+	public static final int  = 2;
 	
 	//TEMP
 	public static final int CONT_FIRE_BUTTON = 1;

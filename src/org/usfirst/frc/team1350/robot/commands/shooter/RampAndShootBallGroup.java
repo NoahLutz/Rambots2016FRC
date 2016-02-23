@@ -7,7 +7,7 @@ public class RampAndShootBallGroup extends CommandGroup {
 	
 	
 	public RampAndShootBallGroup(double shootSpeed, double rampUpDelay, double rampDownDelay) {
-		addParallel(new ExtendBallActuator(rampUpDelay));
+//		addParallel(new ExtendBallActuator(rampUpDelay));
 		addParallel(new ShootBall(shootSpeed, rampDownDelay));
 	}
 

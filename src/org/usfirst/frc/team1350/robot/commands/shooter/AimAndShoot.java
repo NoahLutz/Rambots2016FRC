@@ -12,7 +12,7 @@ public class AimAndShoot extends CommandGroup {
 	private static double shootSpeed = 1.0;
 	
 	public AimAndShoot() {
-		//addSequential(new SetShooterToHigh());
+//		addSequential(new SetShooterToHigh());
 		//addSequential(new RampAndShootBallGroup(shootSpeed, rampUpDelay, rampDownDelay));
 		//addSequential(new RetractBallActuator());
 		
