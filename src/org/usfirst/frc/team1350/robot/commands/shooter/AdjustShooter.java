@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1350.robot.commands.shooter;
 
+import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.subsystems.Shooter;
 import org.usfirst.frc.team1350.robot.utils.Utils;
 
@@ -31,6 +32,7 @@ public class AdjustShooter extends Command {
 
 	@Override
 	protected void execute() {
+		Log.info("inside execute AdjustShooter");
 		// TODO Auto-generated method stub
 		int currentTilt = shooter.getCurrentShooterTilt();
 		
@@ -49,14 +51,17 @@ public class AdjustShooter extends Command {
 		// TODO replace precision with variable, 
 		// TODO even better replace with PID/Proptional motor movement code 
 		boolean isAtAngle = Utils.rangeCheck(calculatedEncoderSteps, currentEncoder, 5);
-
+		
+		// TODO only check the limit switch in the direction we are going, use the encoder values to determin that
+		
 		return isAtAngle || shooter.isAnyLimitHit();
 	}
 
 	@Override
 	protected void end() {
+		shooter.stopTiltMotors();
 		// TODO Auto-generated method stub
-		
+		Log.info("Leaving AdjustShooter");
 	}
 
 	@Override

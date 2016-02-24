@@ -51,7 +51,6 @@ public class Robot extends IterativeRobot {
 		drivetrain = Drivetrain.getInstance();
 		drivetrain.init();	
 		shooter = Shooter.getInstance();
-		shooter.init();
 		lifter = Lifter.getInstance();
 		lifter.init();
 //		rangeFinder = RangeFinder.getInstance();

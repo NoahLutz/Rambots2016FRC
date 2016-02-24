@@ -31,7 +31,8 @@ public class Shooter extends Subsystem {
 	
 	public static final boolean FORWARD = true;
 	public static final boolean REVERSE = false;
-	
+	public static final boolean TILT_FORWARD = false;
+	public static final boolean TILT_REVERSE = true;
 	// TODO adjust
 	public static final float TILT_HOME_POSITION_PRECISION=0.1f;
 
@@ -49,6 +50,7 @@ public class Shooter extends Subsystem {
 	
 	public Shooter() {
 		super();
+		init();
 	}
 	
 	public void init(){
@@ -69,7 +71,7 @@ public class Shooter extends Subsystem {
 
 		
 		// TODO move to autonomous start?
-		findHome();
+//		findHome();
 		
 		Log.info("Exiting Shooter.init");
 	}
@@ -123,6 +125,8 @@ public class Shooter extends Subsystem {
     }
     
     public void runTiltMotors(double speed, boolean direction){
+    	Log.info("runTiltMotors, " + speed + ", Dir: " + direction);
+    	Log.info(Thread.currentThread().getStackTrace().toString());
     	if(!direction){
     		speed = -(speed);
     	}

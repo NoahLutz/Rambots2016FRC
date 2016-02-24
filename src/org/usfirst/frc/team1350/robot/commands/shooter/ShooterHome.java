@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1350.robot.commands.shooter;
 
+import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,31 +8,38 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShooterHome extends Command{
 
 	private Shooter shooter;
-	private final double SPEED = 0.25d;
+	private double speed = 0.25d;
 	
-	public ShooterHome(){
+	public ShooterHome(double speed){
+		this.speed = speed;
 		shooter = Shooter.getInstance();
+		Log.info("Creating new ShooterHome()");
+		
 		requires(shooter);
 	}
 	
 	@Override
 	protected void initialize() {
+		
 	}
 
 	@Override
 	protected void execute() {
 		// TODO change to encoder location
-		shooter.runTiltMotors(SPEED, Shooter.REVERSE);
+		Log.info("inside execute in ShooterHome");
+		shooter.runTiltMotors(speed, Shooter.REVERSE);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		//return shooter.topLimitIsHit();
+		// TODO don't use the anyLimit?
 		return shooter.isAnyLimitHit();
 	}
 
 	@Override
 	protected void end() {
+		Log.info("Leaving ShooterHome()");
 		shooter.stopTiltMotors();
 		shooter.resetEncoder();
 	}

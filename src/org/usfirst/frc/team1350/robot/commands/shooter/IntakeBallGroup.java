@@ -12,7 +12,7 @@ public class IntakeBallGroup extends CommandGroup {
     public IntakeBallGroup() {    
     	float intakeSpeed = 0.5f;
     	Log.info("Entering IntakeBallGroup");
-    	addSequential(new ShooterHome());
+    	addSequential(new ShooterHome(0.25d));
     	addSequential(new IntakeBall(intakeSpeed));
     }
 }
