@@ -12,16 +12,18 @@ public class ShootBall extends Command {
 	private double stopMotorDelay;
 	
 	// Speed is -1.0 to 1.0, delay is time in seconds
-	public ShootBall(double speed, double stopMotorDelay) {
+	public ShootBall(double speed, double stopMotorDelay, double timeout) {
+		setTimeout(timeout);
 		shooter = Shooter.getInstance();
 		this.stopMotorDelay = stopMotorDelay;
 		this.speed = speed;
+		
 		requires(shooter);
 	}
 
 	@Override
 	protected void initialize() {
-//		setTimeout(7);
+		
 	}
 
 	@Override

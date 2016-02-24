@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShooterHome extends Command{
 
 	private Shooter shooter;
-	private final double SPEED = -0.25d;
+	private final double SPEED = 0.25d;
 	
 	public ShooterHome(){
 		shooter = Shooter.getInstance();
@@ -20,12 +20,14 @@ public class ShooterHome extends Command{
 
 	@Override
 	protected void execute() {
+		// TODO change to encoder location
 		shooter.runTiltMotors(SPEED, Shooter.REVERSE);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return shooter.bottomLimitIsHit();
+		//return shooter.topLimitIsHit();
+		return shooter.isAnyLimitHit();
 	}
 
 	@Override

@@ -25,7 +25,8 @@ public class SetShooterToHigh extends Command{
 
 	@Override
 	protected boolean isFinished() {
-		return shooter.topLimitIsHit();
+		// TODO replace with encoder 
+		return shooter.topLimitIsHit() ; // || atCorrectAngle()
 	}
 
 	@Override

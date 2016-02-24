@@ -4,6 +4,7 @@ import org.usfirst.frc.team1350.robot.OI;
 import org.usfirst.frc.team1350.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -24,6 +25,7 @@ public class Lifter extends Subsystem{
 	public static final boolean REVERSE = false;
 	
 	private OI oi;
+	
 	private Talon motor;
 	private DigitalInput bottomLimit;
 	private DigitalInput topLimit;
