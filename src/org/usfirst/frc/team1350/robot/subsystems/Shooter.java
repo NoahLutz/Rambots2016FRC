@@ -9,8 +9,10 @@ import org.usfirst.frc.team1350.robot.utils.Utils;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -48,6 +50,8 @@ public class Shooter extends Subsystem {
 	private DigitalInput bottomLimit;
 	private DigitalInput topLimit;
 	
+	private Talon kickerMotor;
+	
 	public Shooter() {
 		super();
 		init();
@@ -59,11 +63,14 @@ public class Shooter extends Subsystem {
 		shooterMotors = new VictorSP(RobotMap.SHOOTER_MOTORS);
 		
 		tiltMotor = new Talon(RobotMap.SHOOTER_TILT_MOTOR);
-		encoder = new Encoder(RobotMap.SHOOTER_ENCODERA, RobotMap.SHOOTER_ENCODERB, false);
+		encoder = new Encoder(RobotMap.SHOOTER_ENCODERB, RobotMap.SHOOTER_ENCODERA, true, Encoder.EncodingType.k2X);
 		
+				
 		ballSwitch = new DigitalInput(RobotMap.SHOOTER_BALL_SWITCH);
 		bottomLimit = new DigitalInput(RobotMap.SHOOTER_BOTTOM_LIMIT);
 		topLimit = new DigitalInput(RobotMap.SHOOTER_TOP_LIMIT);
+		
+		kickerMotor = new Talon(RobotMap.KICKER_MOTOR);
 		
 		// TODO figure out PID control later
 //		tiltPIDLoop = new PIDController(1, 0, 0, encoder, tiltMotor);
@@ -89,10 +96,10 @@ public class Shooter extends Subsystem {
 		return topLimitIsHit() || bottomLimitIsHit();
 	}
 	
-	public static float convertAngleToEncoderSteps(float angle) {
+	public static double convertAngleToEncoderSteps(double angle) {
 		// Calculate # of encoder values is needed for desired angle
-		float ticksPerRevolution = 420;
-		float encoderTicks = Utils.remap(angle, 0, 360, 0, ticksPerRevolution);
+		double ticksPerRevolution = 420;
+		double encoderTicks = Utils.remap(angle, 0, 360, 0, ticksPerRevolution);
 		
 		return encoderTicks;
 	}
@@ -107,7 +114,10 @@ public class Shooter extends Subsystem {
 	}
 	
 	public int getCurrentShooterTilt() {
-		return encoder.get();
+		int encoderPosition = encoder.get();
+		Log.info("EncoderPosition, " + encoderPosition);
+		Log.info("Encoder," + encoder.getRaw());
+		return encoderPosition;
 	}
 	
 	public void stopShooterMotors(){
@@ -126,7 +136,6 @@ public class Shooter extends Subsystem {
     
     public void runTiltMotors(double speed, boolean direction){
     	Log.info("runTiltMotors, " + speed + ", Dir: " + direction);
-    	Log.info(Thread.currentThread().getStackTrace().toString());
     	if(!direction){
     		speed = -(speed);
     	}
@@ -153,6 +162,14 @@ public class Shooter extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+
+	public void kickBall() {
+		// TODO Auto-generated method stub
+		kickerMotor.set(1);
+	}
     
+	public void stopKickingBall() {
+		kickerMotor.set(0);
+	}
 }
 

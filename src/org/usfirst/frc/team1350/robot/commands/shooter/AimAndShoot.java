@@ -8,23 +8,20 @@ public class AimAndShoot extends CommandGroup {
 	
 	// Ramp up time in seconds
 	private static double rampUpDelay = 2;
-	private static double rampDownDelay = 2; // after ball exits run for this # of seconds
+	private static double rampDownDelay = 1; // after ball exits run for this # of seconds
 
 	// -1.0 to 1.0
 	private static double shootSpeed = 1.0;	
 	private static double shooterTimeout = 10;
-	private static double adjustTiltSpeed = .125d;
+	private static double adjustTiltSpeed = .7d;
 
 	public AimAndShoot() {
-//		addSequential(new SetShooterToHigh());
-		//addSequential(new RampAndShootBallGroup(shootSpeed, rampUpDelay, rampDownDelay));
+		addSequential(new RampAndShootBallGroup(shootSpeed, rampUpDelay, rampDownDelay, shooterTimeout));
 		//addSequential(new RetractBallActuator());
 		
-		addSequential(new ShooterHome(adjustTiltSpeed));
-		// TODO remove once we set home finding code else where
-		//Shooter.getInstance().findHome();
-		addSequential(new AdjustShooter(10, adjustTiltSpeed));
-		//addSequential(new ShootBall(shootSpeed, rampDownDelay, shooterTimeout));
+		//addSequential(new ShooterHome(.1));
+		//addSequential(new AdjustShooter(40, adjustTiltSpeed));
+	//	addSequential(new ShootBall(shootSpeed, rampDownDelay, shooterTimeout));
 	}
 	
 

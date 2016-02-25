@@ -50,5 +50,7 @@ public class RobotMap {
 	public static final int CONT_REV_BUTTON = 2;
 	public static final int CONT_CANCEL = 2;
 	
+	public static final int KICKER_MOTOR = 3;
+	
 	
 }

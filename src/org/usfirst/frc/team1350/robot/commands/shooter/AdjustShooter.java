@@ -9,11 +9,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AdjustShooter extends Command {
 	
 	private Shooter shooter;
-	private float requestedAngle;
+	private double requestedAngle;
 	private int calculatedEncoderSteps;
 	private double rotationSpeed;
 	
-	public AdjustShooter(float angle, double rotationSpeed) {
+	private boolean currentDirection = false;
+	
+	public AdjustShooter(double angle, double rotationSpeed) {
 		shooter = shooter.getInstance();
 		
 		requestedAngle = angle;
@@ -35,13 +37,17 @@ public class AdjustShooter extends Command {
 		Log.info("inside execute AdjustShooter");
 		// TODO Auto-generated method stub
 		int currentTilt = shooter.getCurrentShooterTilt();
+		Log.info("CurrentTiltEncoder, " + currentTilt);
+		Log.info("RequestedEncoder, " + calculatedEncoderSteps);
+		boolean direction = Shooter.TILT_FORWARD;
 		
-		boolean direction = Shooter.FORWARD;
-		
-		if(currentTilt < calculatedEncoderSteps) {
-			direction = Shooter.REVERSE;
+		if(currentTilt > calculatedEncoderSteps) {
+			direction = Shooter.TILT_REVERSE;
 		} 
 		
+		Log.info("Direction: " + direction);
+		
+		currentDirection = direction;
 		shooter.runTiltMotors(rotationSpeed, direction);
 	}
 
@@ -52,9 +58,16 @@ public class AdjustShooter extends Command {
 		// TODO even better replace with PID/Proptional motor movement code 
 		boolean isAtAngle = Utils.rangeCheck(calculatedEncoderSteps, currentEncoder, 5);
 		
-		// TODO only check the limit switch in the direction we are going, use the encoder values to determin that
+		// Checks the current direction and if limit in that direction is hit, estop
+		if(currentDirection == Shooter.TILT_FORWARD && shooter.bottomLimitIsHit()) {
+			Log.info("Tried to move shooter forward, but at limit");
+			return true;
+		} else if(currentDirection == Shooter.TILT_REVERSE && shooter.topLimitIsHit()) {
+			Log.info("Tried to move shooter backward, but at limit");
+			return true;
+		}
 		
-		return isAtAngle || shooter.isAnyLimitHit();
+		return isAtAngle;
 	}
 
 	@Override

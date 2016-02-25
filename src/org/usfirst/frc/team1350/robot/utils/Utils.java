@@ -19,4 +19,10 @@ public class Utils {
 		
 		return output;
 	}
+
+	public static double remap(double value, double low1, double high1, double low2, double high2) {
+		double output = low2 + (value - low1) * (high2 - low2) / (high1 - low1);
+		
+		return output;
+	}
 }

@@ -26,15 +26,14 @@ public class ShooterHome extends Command{
 	@Override
 	protected void execute() {
 		// TODO change to encoder location
-		Log.info("inside execute in ShooterHome");
-		shooter.runTiltMotors(speed, Shooter.REVERSE);
+		//Log.info("inside execute in ShooterHome");
+		shooter.runTiltMotors(speed, Shooter.TILT_REVERSE);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		//return shooter.topLimitIsHit();
-		// TODO don't use the anyLimit?
-		return shooter.isAnyLimitHit();
+		Log.info("LimitHit, " + shooter.topLimitIsHit());
+		return shooter.topLimitIsHit();
 	}
 
 	@Override

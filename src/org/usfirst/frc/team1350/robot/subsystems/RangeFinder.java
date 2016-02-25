@@ -34,7 +34,7 @@ public class RangeFinder extends Subsystem {
 	}
 	
 	public double getRange(){
-		return sensor.getRangeInches();
+		return sensor.getRangeMM();
 	}
 	
     public void initDefaultCommand() {
