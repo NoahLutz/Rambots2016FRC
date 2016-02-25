@@ -31,11 +31,7 @@ public class RobotMap {
 	public static final int SHOOTER_ENCODERA = 3;
 	public static final int SHOOTER_ENCODERB = 4;
 
-	public static final int ULTRASONIC_ECHO_PULSE_OUTPUT = 6;
-	public static final int ULTRASONIC_TRIGGER_PULSE_INPUT = 7;
-	public static final int ULTRASONIC_PING = 8;
-	public static final int ULTRASONIC_ECHO = 9;
-	
+	public static final int RANGEFINDER_PORT = 2;
 	
 	public static final int LIFTER_MOTOR = 6;
 	public static final int LIFTER_TOP_LIMIT = 7;

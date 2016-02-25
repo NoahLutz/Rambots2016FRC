@@ -2,7 +2,7 @@ package org.usfirst.frc.team1350.robot.subsystems;
 
 import org.usfirst.frc.team1350.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -10,9 +10,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class RangeFinder extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	
 	//Singleton
 	private static RangeFinder instance;
 	public static RangeFinder getInstance(){
@@ -22,19 +19,21 @@ public class RangeFinder extends Subsystem {
 		return instance;
 	}
 
-	private Ultrasonic sensor;
+	//TODO test and adjust
+	private final float VOLTAGE_MULTIPLIER = 9.8f;
+
+	private AnalogInput rangeFinder;
 	
 	public RangeFinder(){
 		super();
 	}
 	
 	public void init(){
-    	sensor = new Ultrasonic(RobotMap.ULTRASONIC_ECHO_PULSE_OUTPUT, RobotMap.ULTRASONIC_TRIGGER_PULSE_INPUT);
-    	sensor.setAutomaticMode(true);
+		rangeFinder = new AnalogInput(RobotMap.RANGEFINDER_PORT);
 	}
 	
-	public double getRange(){
-		return sensor.getRangeMM();
+	public float getRange(){
+		return (float) (rangeFinder.getVoltage() * VOLTAGE_MULTIPLIER);
 	}
 	
     public void initDefaultCommand() {
