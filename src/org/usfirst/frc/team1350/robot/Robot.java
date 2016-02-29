@@ -47,14 +47,10 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	//Initilaze subsystems and oi
 		oi = OI.getInstance();
-		oi.init();
 		drivetrain = Drivetrain.getInstance();
-		drivetrain.init();	
 		shooter = Shooter.getInstance();
 		lifter = Lifter.getInstance();
-		lifter.init();
-//		rangeFinder = RangeFinder.getInstance();
-//		rangeFinder.init();
+		rangeFinder = RangeFinder.getInstance();
 		
 		//define autonomous chooser
         chooser = new SendableChooser();

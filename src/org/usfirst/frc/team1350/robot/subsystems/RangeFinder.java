@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1350.robot.subsystems;
 
+import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.RobotMap;
+import org.usfirst.frc.team1350.robot.commands.FindRange;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -25,7 +27,8 @@ public class RangeFinder extends Subsystem {
 	private AnalogInput rangeFinder;
 	
 	public RangeFinder(){
-		super();
+		Log.info("Initialize RangeFinder");
+		init();
 	}
 	
 	public void init(){
@@ -40,6 +43,7 @@ public class RangeFinder extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     	//TODO: add default command
+    	setDefaultCommand(new FindRange());
     }
 }
 

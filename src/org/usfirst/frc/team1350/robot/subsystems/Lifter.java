@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1350.robot.subsystems;
 
+import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.OI;
 import org.usfirst.frc.team1350.robot.RobotMap;
 
@@ -31,7 +32,8 @@ public class Lifter extends Subsystem{
 	private DigitalInput topLimit;
 	
 	public Lifter(){
-		super();
+		Log.info("Initializing Lifter");
+		init();
 	}
 	
 	public void init(){
