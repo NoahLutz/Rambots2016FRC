@@ -22,6 +22,7 @@ public class RobotMap {
 	
 	public static final int JOYSTICK_LEFT = 0;
 	public static final int JOYSTICK_RIGHT = 1; 
+	public static final int CONTROLLER = 2;
 	
 	//TODO Adjust
 	public static final int SHOOTER_MOTORS = 7;	
@@ -47,6 +48,15 @@ public class RobotMap {
 	public static final int CONT_CANCEL = 2;
 	
 	public static final int KICKER_MOTOR = 3;
+	
+	public static final int RPI_CAMERA_SET1 = 0;
+	public static final int RPI_CAMERA_SET2 = 1;
+	
+	//Controller 
+	public static final int CONT_CAM1 = 2;
+	public static final int CONT_CAM2 = 3;
+	
+
 	
 	
 }

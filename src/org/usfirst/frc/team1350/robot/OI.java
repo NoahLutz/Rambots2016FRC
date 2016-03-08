@@ -10,6 +10,9 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Servo;
+import org.usfirst.frc.team1350.robot.commands.ChangeCamera;
+
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -33,6 +36,15 @@ public class OI {
 	
 	public Joystick leftStick;
 	public Joystick rightStick;
+	public Joystick controller;
+	
+	public DigitalOutput camera1;
+	public DigitalOutput camera2;
+	
+	public Button cameraSwitchButton1;
+	public Button cameraSwitchButton2;
+	public Button cameraSwitchButton3;
+	public Button cameraSwitchButton4;
 	
 	public JoystickButton intakeBallButton;
 	public JoystickButton shootBallButton;
@@ -52,6 +64,16 @@ public class OI {
 				
 		intakeBallButton.whenPressed(new IntakeBallGroup());
 		shootBallButton.whenPressed(new AimAndShoot());
+//		controller = new Joystick(RobotMap.CONTROLLER);
+		
+		camera1 = new DigitalOutput(RobotMap.RPI_CAMERA_SET1);
+		camera2 = new DigitalOutput(RobotMap.RPI_CAMERA_SET2);
+		
+		cameraSwitchButton1 = new JoystickButton(rightStick, RobotMap.CONT_CAM1);
+		cameraSwitchButton2 = new JoystickButton(rightStick, RobotMap.CONT_CAM2);
+		
+		cameraSwitchButton1.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA_SET1));
+		cameraSwitchButton2.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA_SET2));
 	}
 }
 

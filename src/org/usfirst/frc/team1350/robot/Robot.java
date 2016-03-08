@@ -6,6 +6,7 @@ import org.usfirst.frc.team1350.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1350.robot.subsystems.Lifter;
 import org.usfirst.frc.team1350.robot.subsystems.RangeFinder;
 import org.usfirst.frc.team1350.robot.subsystems.Shooter;
+import org.usfirst.frc.team1350.robot.subsystems.RaspberryPi;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -30,7 +31,8 @@ public class Robot extends IterativeRobot {
     public static Lifter lifter;
     public static RangeFinder rangeFinder;
     public CameraServer camera;
-    
+    public static RaspberryPi raspi;
+
     Command autonomousCommand;
     SendableChooser chooser;
     
@@ -41,6 +43,7 @@ public class Robot extends IterativeRobot {
 //		camera.startAutomaticCapture("cam1");
 		camera.startAutomaticCapture("cam0");
 
+    	Log.info("Initializing Robot");
     }
 
     /**
@@ -49,6 +52,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	//Initilaze subsystems and oi
+    	raspi = new RaspberryPi().getInstance();
+		raspi.init();
 		oi = OI.getInstance();
 		oi.init();
 		drivetrain = Drivetrain.getInstance();
@@ -59,7 +64,6 @@ public class Robot extends IterativeRobot {
 		lifter.init();
 		rangeFinder = RangeFinder.getInstance();
 		rangeFinder.init();
-		
 		//define autonomous chooser
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new AutoDrive());
@@ -74,6 +78,7 @@ public class Robot extends IterativeRobot {
      */
     public void disabledInit(){
     	shooter.stopShooterMotors();
+    	raspi.turnOffCameras();
     }
 	
 	public void disabledPeriodic() {
