@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1350.robot;
 
+import org.usfirst.frc.team1350.robot.commands.auto.AutoDrive;
 import org.usfirst.frc.team1350.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1350.robot.subsystems.Lifter;
 import org.usfirst.frc.team1350.robot.subsystems.RangeFinder;
@@ -37,7 +38,9 @@ public class Robot extends IterativeRobot {
     	//start camera server and start auto capture
     	camera = CameraServer.getInstance();
     	camera.setQuality(50);
-		camera.startAutomaticCapture("cam1");
+//		camera.startAutomaticCapture("cam1");
+		camera.startAutomaticCapture("cam0");
+
     }
 
     /**
@@ -47,14 +50,19 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	//Initilaze subsystems and oi
 		oi = OI.getInstance();
+		oi.init();
 		drivetrain = Drivetrain.getInstance();
+		drivetrain.init();
 		shooter = Shooter.getInstance();
+		shooter.init();
 		lifter = Lifter.getInstance();
+		lifter.init();
 		rangeFinder = RangeFinder.getInstance();
+		rangeFinder.init();
 		
 		//define autonomous chooser
         chooser = new SendableChooser();
-//        chooser.addDefault("Default Auto", new ExampleCommand());
+        chooser.addDefault("Default Auto", new AutoDrive());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
     }
@@ -84,17 +92,19 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         autonomousCommand = (Command) chooser.getSelected();
         
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
+//			autonomousCommand = new MyAutoCommand();
+			//TODO: add other auto methods
+			Log.info("Placeholder");
 			break;
 		case "Default Auto":
 		default:
-			autonomousCommand = new ExampleCommand();
+			Log.info("Using AutoDrive");
+			autonomousCommand = new AutoDrive();
 			break;
-		} */
-    	
+		}
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }

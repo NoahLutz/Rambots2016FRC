@@ -29,7 +29,7 @@ public class Drivetrain extends Subsystem {
 	
 	public Drivetrain(){
 		Log.info("Creating Drivetrain subsystem");
-		init();
+//		init();
 	}
 
 	public void init(){

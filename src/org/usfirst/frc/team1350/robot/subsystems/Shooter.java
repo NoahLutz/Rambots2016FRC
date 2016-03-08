@@ -54,7 +54,7 @@ public class Shooter extends Subsystem {
 	
 	public Shooter() {
 		super();
-		init();
+//		init();
 	}
 	
 	public void init(){

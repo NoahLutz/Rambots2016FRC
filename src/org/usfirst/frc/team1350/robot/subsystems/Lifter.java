@@ -33,7 +33,7 @@ public class Lifter extends Subsystem{
 	
 	public Lifter(){
 		Log.info("Initializing Lifter");
-		init();
+//		init();
 	}
 	
 	public void init(){

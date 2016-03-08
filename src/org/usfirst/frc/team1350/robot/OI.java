@@ -28,7 +28,7 @@ public class OI {
 	
 	private OI(){
 		Log.info("Initializing OI");
-		init();
+//		init();
 	}
 	
 	public Joystick leftStick;

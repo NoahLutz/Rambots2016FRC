@@ -28,7 +28,6 @@ public class RangeFinder extends Subsystem {
 	
 	public RangeFinder(){
 		Log.info("Initialize RangeFinder");
-		init();
 	}
 	
 	public void init(){
@@ -41,8 +40,6 @@ public class RangeFinder extends Subsystem {
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    	//TODO: add default command
     	setDefaultCommand(new FindRange());
     }
 }
