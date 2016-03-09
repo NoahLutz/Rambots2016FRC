@@ -21,9 +21,13 @@ public class RaspberryPi extends Subsystem {
 		return instance;
 	}
 	
+	private DigitalOutput camera1;
+	private DigitalOutput camera2;
+	
     public void init(){
     	Log.info("Initalizing RPi");
-//    	Robot.oi.camera1.set(true);
+    	camera1 = new DigitalOutput(RobotMap.RPI_CAMERA_SET1);
+    	camera2 = new DigitalOutput(RobotMap.RPI_CAMERA_SET2);
     }
     
     public boolean switchToCamera(int camera){
@@ -31,25 +35,23 @@ public class RaspberryPi extends Subsystem {
     	switch (camera){
     	case RobotMap.RPI_CAMERA_SET1:
     		Log.info("Switched to Camera1");
-    		Robot.oi.camera1.set(true);
+    		camera1.set(true);
     		break;
     	case RobotMap.RPI_CAMERA_SET2:
     		Log.info("Switched to Camera2");
-    		Robot.oi.camera2.set(true);
+    		camera2.set(true);
     		break;
     	}
     	return true;
     }
     
     public void turnOffCameras(){
-    	Robot.oi.camera1.set(false);
-    	Robot.oi.camera2.set(false);
+    	camera1.set(false);
+    	camera2.set(false);
     }
 
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
 }
 

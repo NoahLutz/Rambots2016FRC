@@ -56,21 +56,22 @@ public class OI {
 	
 	//Initialize inputs
 	public void init(){
+		
+		//Joysticks
 		leftStick = new Joystick(RobotMap.JOYSTICK_LEFT);
 		rightStick = new Joystick(RobotMap.JOYSTICK_RIGHT);
+		controller = new Joystick(RobotMap.CONTROLLER);
 		
+		//Shooter
 		intakeBallButton = new JoystickButton(leftStick, RobotMap.CONT_FIRE_BUTTON);
 		shootBallButton = new JoystickButton(rightStick, RobotMap.CONT_FIRE_BUTTON);
-				
+		
 		intakeBallButton.whenPressed(new IntakeBallGroup());
-		shootBallButton.whenPressed(new AimAndShoot());
-//		controller = new Joystick(RobotMap.CONTROLLER);
-		
-		camera1 = new DigitalOutput(RobotMap.RPI_CAMERA_SET1);
-		camera2 = new DigitalOutput(RobotMap.RPI_CAMERA_SET2);
-		
-		cameraSwitchButton1 = new JoystickButton(rightStick, RobotMap.CONT_CAM1);
-		cameraSwitchButton2 = new JoystickButton(rightStick, RobotMap.CONT_CAM2);
+		shootBallButton.whenPressed(new AimAndShoot());		
+
+		//Camera
+		cameraSwitchButton1 = new JoystickButton(controller, RobotMap.CONT_CAM1);
+		cameraSwitchButton2 = new JoystickButton(controller, RobotMap.CONT_CAM2);
 		
 		cameraSwitchButton1.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA_SET1));
 		cameraSwitchButton2.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA_SET2));
