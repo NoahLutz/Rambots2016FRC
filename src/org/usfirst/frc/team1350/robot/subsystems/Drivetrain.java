@@ -5,6 +5,7 @@ import org.usfirst.frc.team1350.robot.RobotMap;
 import org.usfirst.frc.team1350.robot.commands.TeleOpTankDrive;
 
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -45,6 +46,18 @@ public class Drivetrain extends Subsystem {
 	
 	public void autoDrive(double speed, double curve){
 		robotDrive.drive(speed, curve);
+	}
+	
+	public void driveLeftMotor(double speed, double time){
+		leftMotorController.set(speed);
+		Timer.delay(time);
+		leftMotorController.set(0);
+	}
+	
+	public void driveRightMotor(double speed, double time){
+		rightMotorController.set(speed);
+		Timer.delay(time);
+		rightMotorController.set(0);
 	}
 	
     public void initDefaultCommand() {

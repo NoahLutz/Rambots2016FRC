@@ -34,12 +34,14 @@ public class RobotMap {
 	//Buttons 
 	public static final int CONT_CAM1 = 1;
 	public static final int CONT_CAM2 = 3;
-	public static final int CONT_FIRE_BUTTON = 1;
-	public static final int CONT_REV_BUTTON = 2;
+	public static final int CONT_FIRE_BUTTON = 5;
+	public static final int CONT_REV_BUTTON = 6;
 	
 	//Misc
 	public static final int RPI_CAMERA_SET1 = 0;
 	public static final int RPI_CAMERA_SET2 = 1;
-	public static final int RANGEFINDER_PORT = 2;
+	
+	//Analog
+	public static final int RANGEFINDER_PORT = 4;
 
 }

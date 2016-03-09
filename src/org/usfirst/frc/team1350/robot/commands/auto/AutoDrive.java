@@ -1,36 +1,48 @@
 package org.usfirst.frc.team1350.robot.commands.auto;
 
+import org.usfirst.frc.team1350.robot.Log;
+import org.usfirst.frc.team1350.robot.Robot;
+import org.usfirst.frc.team1350.robot.subsystems.Drivetrain;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AutoDrive extends Command{
 
+	//TODO: test and adjust
+	private final float DRIVE_TIME = 11;
+	private final float SPEED = 1;
+	
+	private Drivetrain drivetrain;
+	
+	public AutoDrive(){
+		drivetrain = Drivetrain.getInstance();
+		requires(drivetrain);
+	}
+	
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
-		
+		Log.info("Running AutoDrive");
+		setTimeout(DRIVE_TIME);
 	}
 
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
-		
+		drivetrain.autoDrive(SPEED, 0);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		return isTimedOut();
 	}
 
 	@Override
 	protected void end() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
 		
 	}
 

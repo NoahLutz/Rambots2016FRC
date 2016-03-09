@@ -63,8 +63,8 @@ public class OI {
 		controller = new Joystick(RobotMap.CONTROLLER);
 		
 		//Shooter
-		intakeBallButton = new JoystickButton(leftStick, RobotMap.CONT_FIRE_BUTTON);
-		shootBallButton = new JoystickButton(rightStick, RobotMap.CONT_FIRE_BUTTON);
+		intakeBallButton = new JoystickButton(controller, RobotMap.CONT_FIRE_BUTTON);
+		shootBallButton = new JoystickButton(controller, RobotMap.CONT_FIRE_BUTTON);
 		
 		intakeBallButton.whenPressed(new IntakeBallGroup());
 		shootBallButton.whenPressed(new AimAndShoot());		

@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1350.robot;
 
 import org.usfirst.frc.team1350.robot.commands.auto.AutoDrive;
+import org.usfirst.frc.team1350.robot.commands.auto.AutoDriveShoot;
 import org.usfirst.frc.team1350.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1350.robot.subsystems.Lifter;
 import org.usfirst.frc.team1350.robot.subsystems.RangeFinder;
@@ -64,10 +65,12 @@ public class Robot extends IterativeRobot {
 		lifter.init();
 		rangeFinder = RangeFinder.getInstance();
 		rangeFinder.init();
+		
+		
 		//define autonomous chooser
         chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new AutoDrive());
-//        chooser.addObject("My Auto", new MyAutoCommand());
+        chooser.addDefault("Drive", new AutoDrive());
+        chooser.addObject("Drive and Shoot", new AutoDriveShoot());
         SmartDashboard.putData("Auto mode", chooser);
     }
 	
@@ -98,13 +101,14 @@ public class Robot extends IterativeRobot {
         autonomousCommand = (Command) chooser.getSelected();
         
 		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		
+		//TODO: add other auto methods
 		switch(autoSelected) {
-		case "My Auto":
-//			autonomousCommand = new MyAutoCommand();
-			//TODO: add other auto methods
-			Log.info("Placeholder");
+		case "Drive and Shoot":
+			Log.info("Using AutoDriveShoot");
+			autonomousCommand = new AutoDriveShoot();
 			break;
-		case "Default Auto":
+		case "Drive":
 		default:
 			Log.info("Using AutoDrive");
 			autonomousCommand = new AutoDrive();
