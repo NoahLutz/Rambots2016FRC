@@ -42,6 +42,6 @@ public class RobotMap {
 	public static final int RPI_CAMERA_SET2 = 1;
 	
 	//Analog
-	public static final int RANGEFINDER_PORT = 4;
+	public static final int RANGEFINDER_PORT = 0;
 
 }

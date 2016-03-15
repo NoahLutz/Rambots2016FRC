@@ -23,24 +23,24 @@ public class RangeFinder extends Subsystem {
 	}
 
 	//TODO test and adjust
-	private final float PWM_MULTIPLIER = 147f;
+	private final float PWM_MULTIPLIER = 1.1f;
 
-	private PWM rangeFinder;
+	private AnalogInput rangeFinder;
 	
 	public RangeFinder(){
 		Log.info("Initialize RangeFinder");
 	}
 	
 	public void init(){
-		rangeFinder = new PWM(RobotMap.RANGEFINDER_PORT);
+		rangeFinder = new AnalogInput(RobotMap.RANGEFINDER_PORT);
 	}
 	
 	public float getRange(){
-		return (float) (rangeFinder.getRaw() * PWM_MULTIPLIER);
+		return (float) ((rangeFinder.getVoltage() * PWM_MULTIPLIER));
 	}
 	
 	public float getRaw(){
-		return (float) (rangeFinder.getRaw());
+		return (float) (rangeFinder.getVoltage());
 	}
 	
     public void initDefaultCommand() {
