@@ -3,6 +3,8 @@ package org.usfirst.frc.team1350.robot;
 import org.usfirst.frc.team1350.robot.commands.shooter.AimAndShoot;
 import org.usfirst.frc.team1350.robot.commands.shooter.IntakeBall;
 import org.usfirst.frc.team1350.robot.commands.shooter.IntakeBallGroup;
+import org.usfirst.frc.team1350.robot.commands.shooter.SetShooterToHigh;
+import org.usfirst.frc.team1350.robot.commands.shooter.ShooterHome;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -11,6 +13,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Servo;
 import org.usfirst.frc.team1350.robot.commands.ChangeCamera;
+import org.usfirst.frc.team1350.robot.commands.lifter.LifterDown;
+import org.usfirst.frc.team1350.robot.commands.lifter.LifterUp;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -49,6 +53,9 @@ public class OI {
 	public JoystickButton intakeBallButton;
 	public JoystickButton shootBallButton;
 	
+	public JoystickButton lifterUp;
+	public JoystickButton lifterDown;
+	
 	public AnalogInput tiltActuatorFeedback;
 	public AnalogInput ballActuatorFeedback;
 		
@@ -63,11 +70,18 @@ public class OI {
 		controller = new Joystick(RobotMap.CONTROLLER);
 		
 		//Shooter
-		intakeBallButton = new JoystickButton(controller, RobotMap.CONT_FIRE_BUTTON);
+		intakeBallButton = new JoystickButton(controller, RobotMap.CONT_INTAKE_BUTTON);
 		shootBallButton = new JoystickButton(controller, RobotMap.CONT_FIRE_BUTTON);
 		
-		intakeBallButton.whenPressed(new IntakeBallGroup());
-		shootBallButton.whenPressed(new AimAndShoot());		
+		intakeBallButton.whenPressed(new ShooterHome());
+		shootBallButton.whenPressed(new AimAndShoot());	
+		
+		//Lifter
+		lifterUp = new JoystickButton(controller, RobotMap.CONT_LIFTER_UP);
+		lifterDown = new JoystickButton(controller, RobotMap.CONT_LIFTER_DOWN);
+		
+//		lifterUp.whenPressed(new LifterUp());
+//		lifterDown.whenPressed(new LifterDown());
 
 		//Camera
 		cameraSwitchButton1 = new JoystickButton(controller, RobotMap.CONT_CAM1);

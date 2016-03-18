@@ -16,16 +16,16 @@ public class RobotMap {
 	public static final int DRIVE_TRAIN_LEFT_MOTOR_CONTROLLER = 1;
 	public static final int DRIVE_TRAIN_RIGHT_MOTOR_CONTROLLER = 0;
 	public static final int SHOOTER_MOTORS = 7;	
-	public static final int SHOOTER_TILT_MOTOR = 2;
-	public static final int LIFTER_MOTOR = 6;
+	public static final int SHOOTER_TILT_MOTOR = 6;
+	public static final int LIFTER_MOTOR = 2;
 	public static final int KICKER_MOTOR = 3;
 
 	//Limit Switches
 	public static final int SHOOTER_BOTTOM_LIMIT = 6;
 	public static final int SHOOTER_TOP_LIMIT = 5;
 	public static final int SHOOTER_BALL_SWITCH = 2;
-	public static final int LIFTER_TOP_LIMIT = 7;
-	public static final int LIFTER_BOTTOM_LIMIT = 8;
+	public static final int LIFTER_TOP_LIMIT = 8;
+	public static final int LIFTER_BOTTOM_LIMIT = 7;
 
 	//Encoders
 	public static final int SHOOTER_ENCODERA = 3;
@@ -35,7 +35,9 @@ public class RobotMap {
 	public static final int CONT_CAM1 = 1;
 	public static final int CONT_CAM2 = 3;
 	public static final int CONT_FIRE_BUTTON = 5;
-	public static final int CONT_REV_BUTTON = 6;
+	public static final int CONT_INTAKE_BUTTON = 6;
+	public static final int CONT_LIFTER_UP = 4;
+	public static final int CONT_LIFTER_DOWN = 2;
 	
 	//Misc
 	public static final int RPI_CAMERA_SET1 = 0;

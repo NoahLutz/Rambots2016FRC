@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1350.robot.commands.shooter;
 
+import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -16,17 +17,17 @@ public class SetShooterToHigh extends Command{
 	
 	@Override
 	protected void initialize() {
+		Log.info("SetShootertoHigh");
 	}
 
 	@Override
 	protected void execute() {
-		shooter.runTiltMotors(SPEED, Shooter.FORWARD);
+		shooter.runTiltMotors(SPEED, Shooter.TILT_FORWARD);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		// TODO replace with encoder 
-		return shooter.topLimitIsHit() ; // || atCorrectAngle()
+		return shooter.bottomLimitIsHit();
 	}
 
 	@Override
@@ -36,8 +37,7 @@ public class SetShooterToHigh extends Command{
 
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
-		
+		shooter.stopTiltMotors();
 	}
 
 }

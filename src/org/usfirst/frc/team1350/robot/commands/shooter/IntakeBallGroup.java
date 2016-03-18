@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class IntakeBallGroup extends CommandGroup {
     
-    public IntakeBallGroup() {    
+    public IntakeBallGroup() {
     	float intakeSpeed = 0.5f;
-    	Log.info("Entering IntakeBallGroup");
-    	addSequential(new ShooterHome(0.25d));
-    	addSequential(new IntakeBall(intakeSpeed));
+
+    	addSequential(new ShooterHome());
+//    	addSequential(new IntakeBall(intakeSpeed));
     }
 }

@@ -9,6 +9,7 @@ public class KickBall extends Command {
 
 	private Shooter shooter;
 	private double rampUpDelay;
+	private double timeout = 2;
 	
 	public KickBall(double rampUpDelay) {
 		shooter = Shooter.getInstance();
@@ -20,8 +21,7 @@ public class KickBall extends Command {
 	@Override
 	protected void initialize() {
 		Timer.delay(rampUpDelay);
-		// TODO Auto-generated method stub
-		
+		setTimeout(timeout);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class KickBall extends Command {
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return !shooter.ballIsInShooter();
+		return isTimedOut();
 	}
 
 	@Override

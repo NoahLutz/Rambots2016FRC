@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1350.robot.commands.lifter;
 
+import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.subsystems.Lifter;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,6 +9,7 @@ public class LifterUp extends Command{
 
 	
 	private Lifter lifter;
+	private final double timeout = 3d;
 	
 	public LifterUp(){
 		lifter = Lifter.getInstance();
@@ -16,16 +18,18 @@ public class LifterUp extends Command{
 	
 	@Override
 	protected void initialize() {
+		setTimeout(timeout);
 	}
 
 	@Override
 	protected void execute() {
+//		Log.info("Forward");
 		lifter.runMotor(Lifter.SPEED, Lifter.FORWARD);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return lifter.topLimitIsHit();
+		return lifter.topLimitIsHit() || isTimedOut();
 	}
 
 	@Override
@@ -35,7 +39,7 @@ public class LifterUp extends Command{
 
 	@Override
 	protected void interrupted() {
-		
+		lifter.stopMotor();
 	}
 
 }

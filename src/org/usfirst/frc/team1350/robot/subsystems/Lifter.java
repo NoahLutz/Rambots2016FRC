@@ -20,7 +20,7 @@ public class Lifter extends Subsystem{
 		return instance;
 	}
 	
-	public static final double SPEED = .25;
+	public static final double SPEED = .5;
 	
 	public static final boolean FORWARD = true;
 	public static final boolean REVERSE = false;
@@ -40,12 +40,14 @@ public class Lifter extends Subsystem{
 		oi = OI.getInstance();
 		
 		motor = new Talon(RobotMap.LIFTER_MOTOR);
+		motor.setInverted(true);
 		
 		bottomLimit = new DigitalInput(RobotMap.LIFTER_BOTTOM_LIMIT);
 		topLimit = new DigitalInput(RobotMap.LIFTER_TOP_LIMIT);
 	}
 	
 	public boolean bottomLimitIsHit(){
+		//return the opposite of this because its wired backwards and i'm to lazy to change it
 		return bottomLimit.get();
 	}
 	
@@ -54,6 +56,7 @@ public class Lifter extends Subsystem{
 	}
 	
 	public void runMotor(double speed, boolean direction){
+//		Log.info("Running motors");
 		if(!direction){
 			speed = -(speed);
 		}

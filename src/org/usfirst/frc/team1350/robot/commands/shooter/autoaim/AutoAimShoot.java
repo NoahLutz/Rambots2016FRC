@@ -31,7 +31,7 @@ public class AutoAimShoot extends CommandGroup {
 		Log.info("AutoAimShoot calculated: " + calculatedAngle);
 		
 		// TODO, should not need to home shooter
-		addSequential(new ShooterHome(adjustTiltSpeed));
+		addSequential(new ShooterHome());
 		Log.info("Moving To: " + calculatedAngle);
 		addSequential(new AdjustShooter(calculatedAngle, adjustTiltSpeed));
 		Log.info("Got to finish angle: " + calculatedAngle);

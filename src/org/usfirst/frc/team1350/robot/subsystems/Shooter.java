@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Shooter extends Subsystem {
+public class Shooter extends PIDSubsystem {
     
 	//singleton
 	private static Shooter instance;
@@ -53,7 +53,11 @@ public class Shooter extends Subsystem {
 	private Talon kickerMotor;
 	
 	public Shooter() {
-		super();
+		//TODO: try larger P
+		//TODO: if that doesn't work try adding a I value
+		super("Shooter", 10.0, 0.0, 0.0);
+		getPIDController().setContinuous(false);
+		setAbsoluteTolerance(5);
 //		init();
 	}
 	
@@ -63,8 +67,8 @@ public class Shooter extends Subsystem {
 		shooterMotors = new VictorSP(RobotMap.SHOOTER_MOTORS);
 		
 		tiltMotor = new Talon(RobotMap.SHOOTER_TILT_MOTOR);
-		encoder = new Encoder(RobotMap.SHOOTER_ENCODERB, RobotMap.SHOOTER_ENCODERA, true, Encoder.EncodingType.k2X);
-		
+		encoder = new Encoder(RobotMap.SHOOTER_ENCODERA, RobotMap.SHOOTER_ENCODERB, true, Encoder.EncodingType.k4X);
+		encoder.reset();
 				
 		ballSwitch = new DigitalInput(RobotMap.SHOOTER_BALL_SWITCH);
 		bottomLimit = new DigitalInput(RobotMap.SHOOTER_BOTTOM_LIMIT);
@@ -98,7 +102,8 @@ public class Shooter extends Subsystem {
 	
 	public static double convertAngleToEncoderSteps(double angle) {
 		// Calculate # of encoder values is needed for desired angle
-		double ticksPerRevolution = 420;
+		//TODO: chnange this based on new encoder
+		double ticksPerRevolution = 10000;
 		double encoderTicks = Utils.remap(angle, 0, 360, 0, ticksPerRevolution);
 		
 		return encoderTicks;
@@ -115,8 +120,8 @@ public class Shooter extends Subsystem {
 	
 	public int getCurrentShooterTilt() {
 		int encoderPosition = encoder.get();
-		Log.info("EncoderPosition, " + encoderPosition);
-		Log.info("Encoder," + encoder.getRaw());
+//		Log.info("EncoderPosition, " + encoderPosition);
+//		Log.info("Encoder," + encoder.getRaw());
 		return encoderPosition;
 	}
 	
@@ -135,7 +140,9 @@ public class Shooter extends Subsystem {
     }
     
     public void runTiltMotors(double speed, boolean direction){
-    	Log.info("runTiltMotors, " + speed + ", Dir: " + direction);
+//    	Log.info("encoder val: " + Integer.toString(getCurrentShooterTilt()));
+//    	Log.info("runTiltMotors, " + speed + ", Dir: " + direction);
+//    	Log.info("running tilt motors");
     	if(!direction){
     		speed = -(speed);
     	}
@@ -170,6 +177,16 @@ public class Shooter extends Subsystem {
     
 	public void stopKickingBall() {
 		kickerMotor.set(0);
+	}
+
+	@Override
+	protected double returnPIDInput() {
+		return getCurrentShooterTilt();
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+		tiltMotor.pidWrite(-output);
 	}
 }
 
