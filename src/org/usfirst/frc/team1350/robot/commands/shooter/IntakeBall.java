@@ -12,6 +12,7 @@ public class IntakeBall extends Command {
 
 	private Shooter shooter;
 	private static float speed;
+	private double timeout = 6;
 	
 	private static final float REVERSE_SHOOTER_TIMEOUT = 10;
 	
@@ -28,6 +29,7 @@ public class IntakeBall extends Command {
 	@Override
 	protected void initialize() {
 		Log.info("Initalizing ReverseShooterMotors");
+		setTimeout(timeout);
 	}
 
 	@Override
@@ -39,7 +41,8 @@ public class IntakeBall extends Command {
 	@Override
 	protected boolean isFinished() {
 		// TODO invert the method name
-		return (!shooter.ballIsInShooter());
+		Log.info("in IsFinished IntakeBall");
+		return (!shooter.ballIsInShooter()) || isTimedOut();
 	}
 
 	@Override

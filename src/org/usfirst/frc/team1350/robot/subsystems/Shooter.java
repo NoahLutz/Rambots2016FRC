@@ -4,6 +4,7 @@ import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.OI;
 import org.usfirst.frc.team1350.robot.RobotMap;
 import org.usfirst.frc.team1350.robot.commands.shooter.SetShooterToHigh;
+import org.usfirst.frc.team1350.robot.commands.shooter.ShooterHome;
 import org.usfirst.frc.team1350.robot.utils.Utils;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -31,8 +32,8 @@ public class Shooter extends PIDSubsystem {
 
 	private static OI oi;
 	
-	public static final boolean FORWARD = true;
-	public static final boolean REVERSE = false;
+	public static final boolean FORWARD = false;
+	public static final boolean REVERSE = true;
 	public static final boolean TILT_FORWARD = false;
 	public static final boolean TILT_REVERSE = true;
 	// TODO adjust
@@ -45,17 +46,20 @@ public class Shooter extends PIDSubsystem {
 	private boolean homeIsFound = false;
 	private int encoderHomePosition = 0;
 	
-	private PIDController tiltPIDLoop;
 	private Talon tiltMotor;
 	private DigitalInput bottomLimit;
 	private DigitalInput topLimit;
 	
 	private Talon kickerMotor;
+	private static double p = .002;
+	private static double i = 0;
+	private static double d = 0;
 	
 	public Shooter() {
 		//TODO: try larger P
 		//TODO: if that doesn't work try adding a I value
-		super("Shooter", 10.0, 0.0, 0.0);
+		
+		super("Shooter", p, i, d);
 		getPIDController().setContinuous(false);
 		setAbsoluteTolerance(5);
 //		init();
@@ -75,10 +79,9 @@ public class Shooter extends PIDSubsystem {
 		topLimit = new DigitalInput(RobotMap.SHOOTER_TOP_LIMIT);
 		
 		kickerMotor = new Talon(RobotMap.KICKER_MOTOR);
+		kickerMotor.setInverted(true);
 		
-		// TODO figure out PID control later
-//		tiltPIDLoop = new PIDController(1, 0, 0, encoder, tiltMotor);
-//		tiltPIDLoop.setOutputRange(-0.5, 0.5);
+//		this.setOutputRange(0, .25);
 
 		
 		// TODO move to autonomous start?
@@ -103,7 +106,8 @@ public class Shooter extends PIDSubsystem {
 	public static double convertAngleToEncoderSteps(double angle) {
 		// Calculate # of encoder values is needed for desired angle
 		//TODO: chnange this based on new encoder
-		double ticksPerRevolution = 10000;
+		//TODO: test this number. run for 10000 ticks and see if it does 1 revolution
+		double ticksPerRevolution = 100000;
 		double encoderTicks = Utils.remap(angle, 0, 360, 0, ticksPerRevolution);
 		
 		return encoderTicks;
@@ -130,7 +134,7 @@ public class Shooter extends PIDSubsystem {
 	}
 	
 	public boolean ballIsInShooter(){
-		return ballSwitch.get();
+		return !ballSwitch.get();
 	}
 	
     public DigitalInput getBallSwitch() {
@@ -166,13 +170,12 @@ public class Shooter extends PIDSubsystem {
     }
     
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+//    	setDefaultCommand(new ShooterHome());
     }
 
 	public void kickBall() {
 		// TODO Auto-generated method stub
-		kickerMotor.set(1);
+		kickerMotor.set(.5);
 	}
     
 	public void stopKickingBall() {

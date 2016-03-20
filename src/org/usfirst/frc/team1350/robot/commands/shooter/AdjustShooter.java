@@ -1,10 +1,12 @@
 package org.usfirst.frc.team1350.robot.commands.shooter;
 
 import org.usfirst.frc.team1350.robot.Log;
+import org.usfirst.frc.team1350.robot.commands.shooter.autoaim.AutoAimCalculations;
 import org.usfirst.frc.team1350.robot.subsystems.Shooter;
 import org.usfirst.frc.team1350.robot.utils.Utils;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AdjustShooter extends Command {
 	
@@ -17,6 +19,9 @@ public class AdjustShooter extends Command {
 	
 	public AdjustShooter(double angle, double rotationSpeed) {
 		shooter = shooter.getInstance();
+//		double current_distance = SmartDashboard.getDouble("Range: ");
+//		double velocity = 11;
+//		double actual_angle = AutoAimCalculations.calculateAngle(current_distance, velocity, 2438.4);
 		
 		requestedAngle = angle;
 		calculatedEncoderSteps = (int) Shooter.convertAngleToEncoderSteps(requestedAngle);
@@ -75,7 +80,6 @@ public class AdjustShooter extends Command {
 	protected void end() {
 //		shooter.stopTiltMotors();
 		shooter.disable();
-		// TODO Auto-generated method stub
 		Log.info("Leaving AdjustShooter");
 	}
 
@@ -86,4 +90,8 @@ public class AdjustShooter extends Command {
 //		shooter.stopTiltMotors();
 	}
 
+	public void setAngle(double angle) {
+		requestedAngle = angle;
+		calculatedEncoderSteps = (int) Shooter.convertAngleToEncoderSteps(requestedAngle);
+	}
 }

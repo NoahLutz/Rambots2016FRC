@@ -33,11 +33,15 @@ public class RobotMap {
 	
 	//Buttons 
 	public static final int CONT_CAM1 = 1;
+	
 	public static final int CONT_CAM2 = 3;
-	public static final int CONT_FIRE_BUTTON = 5;
-	public static final int CONT_INTAKE_BUTTON = 6;
+	public static final int CONT_FIRE_BUTTON = 6;
+	public static final int CONT_AUTO_FIRE_BUTTON = 8;
+	public static final int CONT_INTAKE_BUTTON = 5;
 	public static final int CONT_LIFTER_UP = 4;
 	public static final int CONT_LIFTER_DOWN = 2;
+	//TODO: remove
+	public static final int CONT_TEMP_SHOOTER_HOME = 7;
 	
 	//Misc
 	public static final int RPI_CAMERA_SET1 = 0;

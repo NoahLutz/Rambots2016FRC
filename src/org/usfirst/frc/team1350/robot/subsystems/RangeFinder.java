@@ -29,10 +29,11 @@ public class RangeFinder extends Subsystem {
 	
 	public RangeFinder(){
 		Log.info("Initialize RangeFinder");
+		rangeFinder = new AnalogInput(RobotMap.RANGEFINDER_PORT);
 	}
 	
 	public void init(){
-		rangeFinder = new AnalogInput(RobotMap.RANGEFINDER_PORT);
+//		rangeFinder = new AnalogInput(RobotMap.RANGEFINDER_PORT);
 	}
 	
 	public float getRange(){

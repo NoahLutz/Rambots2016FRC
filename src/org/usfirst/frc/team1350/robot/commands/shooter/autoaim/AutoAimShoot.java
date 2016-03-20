@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 
-public class AutoAimShoot extends CommandGroup {
+public class AutoAimShoot extends AdjustShooter {
 	
 	private Shooter shooter;
 	private RangeFinder rangeFinder;
@@ -21,24 +21,24 @@ public class AutoAimShoot extends CommandGroup {
 	private static double adjustTiltSpeed = .125d;
 	
 	private double calculatedAngle;
-	
-	public void AutoAimShoot() {
+
+	public AutoAimShoot() {
+		// Setting angle to zero, calculating angle in init, then moving
+		super(0, adjustTiltSpeed);
 		shooter = Shooter.getInstance();
 		rangeFinder = RangeFinder.getInstance();
-		
+	}
+	
+	@Override
+	public void initialize() {
 		double currentDistance = rangeFinder.getRange();
 		calculatedAngle = AutoAimCalculations.calculateAngle(currentDistance, velocityInMMPerSecond, heightOfGoalInMM);
 		Log.info("AutoAimShoot calculated: " + calculatedAngle);
 		
-		// TODO, should not need to home shooter
-		addSequential(new ShooterHome());
-		Log.info("Moving To: " + calculatedAngle);
-		addSequential(new AdjustShooter(calculatedAngle, adjustTiltSpeed));
-		Log.info("Got to finish angle: " + calculatedAngle);
-		// TODO add shoot code back
-		//addSequential(new ShootBall(shootSpeed, rampDownDelay, shooterTimeout));
-
+		// TODO, home shooter on init, VERY IMPORTANT
+		Log.info("Moving To: " + calculatedAngle);		
+		this.setAngle(90);
 	}
-	
+
 
 }

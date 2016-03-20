@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutoDrive extends Command{
 
 	//TODO: test and adjust
-	private final float DRIVE_TIME = 11;
+	private final float DRIVE_TIME = 4;
 	private final float SPEED = 1;
 	
 	private Drivetrain drivetrain;
@@ -32,7 +32,6 @@ public class AutoDrive extends Command{
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return isTimedOut();
 	}
 

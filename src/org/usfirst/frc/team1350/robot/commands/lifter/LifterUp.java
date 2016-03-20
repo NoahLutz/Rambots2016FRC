@@ -24,7 +24,7 @@ public class LifterUp extends Command{
 	@Override
 	protected void execute() {
 //		Log.info("Forward");
-		lifter.runMotor(Lifter.SPEED, Lifter.FORWARD);
+		lifter.runMotor(1, Lifter.FORWARD);
 	}
 
 	@Override
