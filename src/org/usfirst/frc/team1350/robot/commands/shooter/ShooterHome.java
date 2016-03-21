@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShooterHome extends Command{
 
 	private Shooter shooter;
-	private double speed=.4;
+	private double speed=.25;
 	
 	public ShooterHome(){
 		shooter = Shooter.getInstance();
@@ -22,10 +22,8 @@ public class ShooterHome extends Command{
 
 	@Override
 	protected void execute() {
-		shooter.enable();
-
 		Log.info("ENCODER: " + shooter.getCurrentShooterTilt());
-//		shooter.runTiltMotors(speed, Shooter.TILT_REVERSE);
+		shooter.runTiltMotors(speed, Shooter.TILT_REVERSE);
 	}
 
 	@Override
@@ -38,14 +36,12 @@ public class ShooterHome extends Command{
 
 	@Override
 	protected void end() {
-//		shooter.stopTiltMotors();
-		shooter.disable();
+		shooter.stopTiltMotors();
 		shooter.resetEncoder();
 	}
 
 	@Override
 	protected void interrupted() {
-//		shooter.stopTiltMotors();
-		shooter.disable();
+		shooter.stopTiltMotors();
 	}
 }

@@ -33,37 +33,32 @@ public class AdjustShooter extends Command {
 
 	@Override
 	protected void initialize() {
-		Log.info("Adjusting Shooter");
+
 	}
 
 	@Override
 	protected void execute() {
+		Log.info("Adjusting Shooter");
 		Log.info("inside execute AdjustShooter");
 
 		int currentTilt = shooter.getCurrentShooterTilt();
+
 		Log.info("CurrentTiltEncoder, " + currentTilt);
 		Log.info("RequestedEncoder, " + calculatedEncoderSteps);
-//		boolean direction = Shooter.TILT_FORWARD;
-//		
-//		if(currentTilt > calculatedEncoderSteps) {
-//			direction = Shooter.TILT_REVERSE;
-//		} 
-//		
-//		Log.info("Direction: " + direction);
-//		
-//		currentDirection = direction;
-//		shooter.runTiltMotors(rotationSpeed, direction);
-		shooter.setSetpoint(calculatedEncoderSteps);
-		shooter.enable();
+		boolean direction = Shooter.TILT_FORWARD;
+		
+		if(currentTilt > calculatedEncoderSteps) {
+			direction = Shooter.TILT_REVERSE;
+		} 
+		
+		Log.info("Direction: " + direction);
+		
+		currentDirection = direction;
+		shooter.runTiltMotors(rotationSpeed, direction);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		int currentEncoder = shooter.getCurrentShooterTilt();
-		// TODO replace precision with variable, 
-		// TODO even better replace with PID/Proptional motor movement code 
-		boolean isAtAngle = Utils.rangeCheck(calculatedEncoderSteps, currentEncoder, 10);
-		
 		// Checks the current direction and if limit in that direction is hit, estop
 		if(currentDirection == Shooter.TILT_FORWARD && shooter.bottomLimitIsHit()) {
 			Log.info("Tried to move shooter forward, but at limit");
@@ -73,21 +68,24 @@ public class AdjustShooter extends Command {
 			return true;
 		}
 		
-		return isAtAngle || shooter.onTarget();
+		int currentAngle = shooter.getCurrentShooterTilt();
+		if(Utils.rangeCheck(calculatedEncoderSteps, currentAngle, 150)) {
+			return true;
+		}
+		
+		
+		return false;
 	}
 
 	@Override
 	protected void end() {
-//		shooter.stopTiltMotors();
-		shooter.disable();
 		Log.info("Leaving AdjustShooter");
+		shooter.stopTiltMotors();
 	}
 
 	@Override
 	protected void interrupted() {
 		// TODO Auto-generated method stub
-		shooter.disable();
-//		shooter.stopTiltMotors();
 	}
 
 	public void setAngle(double angle) {

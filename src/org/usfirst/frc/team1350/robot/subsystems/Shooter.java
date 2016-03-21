@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Shooter extends PIDSubsystem {
+public class Shooter extends Subsystem {
     
 	//singleton
 	private static Shooter instance;
@@ -51,18 +51,12 @@ public class Shooter extends PIDSubsystem {
 	private DigitalInput topLimit;
 	
 	private Talon kickerMotor;
-	private static double p = .002;
+	private static double p = 0.0001;
 	private static double i = 0;
 	private static double d = 0;
 	
 	public Shooter() {
-		//TODO: try larger P
-		//TODO: if that doesn't work try adding a I value
-		
-		super("Shooter", p, i, d);
-		getPIDController().setContinuous(false);
-		setAbsoluteTolerance(5);
-//		init();
+		init();
 	}
 	
 	public void init(){
@@ -80,12 +74,6 @@ public class Shooter extends PIDSubsystem {
 		
 		kickerMotor = new Talon(RobotMap.KICKER_MOTOR);
 		kickerMotor.setInverted(true);
-		
-//		this.setOutputRange(0, .25);
-
-		
-		// TODO move to autonomous start?
-//		findHome();
 		
 		Log.info("Exiting Shooter.init");
 	}
@@ -107,7 +95,7 @@ public class Shooter extends PIDSubsystem {
 		// Calculate # of encoder values is needed for desired angle
 		//TODO: chnange this based on new encoder
 		//TODO: test this number. run for 10000 ticks and see if it does 1 revolution
-		double ticksPerRevolution = 100000;
+		double ticksPerRevolution = 10000;
 		double encoderTicks = Utils.remap(angle, 0, 360, 0, ticksPerRevolution);
 		
 		return encoderTicks;
@@ -182,14 +170,5 @@ public class Shooter extends PIDSubsystem {
 		kickerMotor.set(0);
 	}
 
-	@Override
-	protected double returnPIDInput() {
-		return getCurrentShooterTilt();
-	}
-
-	@Override
-	protected void usePIDOutput(double output) {
-		tiltMotor.pidWrite(-output);
-	}
 }
 

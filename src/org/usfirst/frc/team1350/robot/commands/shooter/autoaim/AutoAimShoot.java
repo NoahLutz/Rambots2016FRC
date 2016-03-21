@@ -31,13 +31,16 @@ public class AutoAimShoot extends AdjustShooter {
 	
 	@Override
 	public void initialize() {
+		super.initialize();
 		double currentDistance = rangeFinder.getRange();
 		calculatedAngle = AutoAimCalculations.calculateAngle(currentDistance, velocityInMMPerSecond, heightOfGoalInMM);
 		Log.info("AutoAimShoot calculated: " + calculatedAngle);
 		
+		// TODO add out of range angle default angle/move to highest
+		
 		// TODO, home shooter on init, VERY IMPORTANT
 		Log.info("Moving To: " + calculatedAngle);		
-		this.setAngle(90);
+		this.setAngle(10);
 	}
 
 
