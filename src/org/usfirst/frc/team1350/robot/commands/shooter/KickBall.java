@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1350.robot.commands.shooter;
 
+import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -9,7 +10,7 @@ public class KickBall extends Command {
 
 	private Shooter shooter;
 	private double rampUpDelay;
-	private double timeout = 2;
+	private double timeout = .5;
 	
 	public KickBall(double rampUpDelay) {
 		shooter = Shooter.getInstance();
@@ -26,26 +27,23 @@ public class KickBall extends Command {
 
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
 		shooter.kickBall();
+		Log.info("Running kickball");
 	}
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return isTimedOut();
 	}
 
 	@Override
 	protected void end() {
-		// TODO Auto-generated method stub
 		shooter.stopKickingBall();
 	}
 
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
-		
+		shooter.stopKickingBall();
 	}
 	
 	

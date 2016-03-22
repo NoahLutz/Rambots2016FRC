@@ -19,10 +19,7 @@ public class AdjustShooter extends Command {
 	
 	public AdjustShooter(double angle, double rotationSpeed) {
 		shooter = shooter.getInstance();
-//		double current_distance = SmartDashboard.getDouble("Range: ");
-//		double velocity = 11;
-//		double actual_angle = AutoAimCalculations.calculateAngle(current_distance, velocity, 2438.4);
-		
+
 		requestedAngle = angle;
 		calculatedEncoderSteps = (int) Shooter.convertAngleToEncoderSteps(requestedAngle);
 		

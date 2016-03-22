@@ -42,6 +42,7 @@ public class RobotMap {
 	public static final int CONT_LIFTER_DOWN = 2;
 	//TODO: remove
 	public static final int CONT_TEMP_SHOOTER_HOME = 7;
+	public static final int CONT_TEMP_KICKER_BUTTON = 9;
 	
 	//Misc
 	public static final int RPI_CAMERA_SET1 = 0;

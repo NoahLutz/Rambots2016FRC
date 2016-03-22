@@ -59,6 +59,7 @@ public class OI {
 	public JoystickButton autoShootButton;
 	//TODO: remove
 	public JoystickButton tempShooterHomeButton;
+	public JoystickButton tempKickerMotorButton;
 	
 	public JoystickButton lifterUp;
 	public JoystickButton lifterDown;
@@ -81,12 +82,15 @@ public class OI {
 //		shootBallButton = new JoystickButton(controller, RobotMap.CONT_FIRE_BUTTON);
 		autoShootButton = new JoystickButton(controller, RobotMap.CONT_AUTO_FIRE_BUTTON);
 		tempShooterHomeButton = new JoystickButton(controller, RobotMap.CONT_TEMP_SHOOTER_HOME);
+		tempKickerMotorButton = new JoystickButton(controller, RobotMap.CONT_TEMP_KICKER_BUTTON);
 		
 //		intakeBallButton.whenPressed(new IntakeBall(.5f));
 //		shootBallButton.whenPressed(new ShootBall(1,1, 3 ));	
 		tempShooterHomeButton.whenPressed(new ShooterHome());
 		
 		autoShootButton.whenPressed(new AutoAimShoot());
+		
+		tempKickerMotorButton.whenPressed(new KickBall(0));
 		
 		//Lifter
 		lifterUp = new JoystickButton(controller, RobotMap.CONT_LIFTER_UP);

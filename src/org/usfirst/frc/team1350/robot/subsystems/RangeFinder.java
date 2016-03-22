@@ -3,6 +3,7 @@ package org.usfirst.frc.team1350.robot.subsystems;
 import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.RobotMap;
 import org.usfirst.frc.team1350.robot.commands.FindRange;
+import org.usfirst.frc.team1350.robot.utils.Utils;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PWM;
@@ -22,9 +23,6 @@ public class RangeFinder extends Subsystem {
 		return instance;
 	}
 
-	//TODO test and adjust
-	private final float PWM_MULTIPLIER = 1.1f;
-
 	private AnalogInput rangeFinder;
 	
 	public RangeFinder(){
@@ -33,11 +31,12 @@ public class RangeFinder extends Subsystem {
 	}
 	
 	public void init(){
-//		rangeFinder = new AnalogInput(RobotMap.RANGEFINDER_PORT);
 	}
 	
 	public float getRange(){
-		return (float) ((rangeFinder.getVoltage() * PWM_MULTIPLIER));
+		float mm = (float) ((rangeFinder.getVoltage()*1000)/.977);
+		//Log.info("Metric: " + mm);
+		return mm;
 	}
 	
 	public float getRaw(){

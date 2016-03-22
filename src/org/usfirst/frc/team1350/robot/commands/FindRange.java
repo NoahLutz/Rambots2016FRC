@@ -24,8 +24,8 @@ public class FindRange extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("Range: ", rangefinder.getRange());
-    	SmartDashboard.putNumber("Raw PWM", rangefinder.getRaw());
+    	SmartDashboard.putNumber("Range", rangefinder.getRange());
+    	SmartDashboard.putNumber("Raw Voltage", rangefinder.getRaw());
     }
 
     // Make this return true when this Command no longer needs to run execute()

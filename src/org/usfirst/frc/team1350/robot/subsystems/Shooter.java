@@ -162,8 +162,7 @@ public class Shooter extends Subsystem {
     }
 
 	public void kickBall() {
-		// TODO Auto-generated method stub
-		kickerMotor.set(.5);
+		kickerMotor.set(1);
 	}
     
 	public void stopKickingBall() {

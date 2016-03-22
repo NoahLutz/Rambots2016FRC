@@ -18,7 +18,7 @@ public class AutoAimShoot extends AdjustShooter {
 	private final static double velocityInMMPerSecond = 12000;
 	private final static double heightOfGoalInMM = 2286;
 	
-	private static double adjustTiltSpeed = .125d;
+	private static double adjustTiltSpeed = .25d;
 	
 	private double calculatedAngle;
 
@@ -40,7 +40,7 @@ public class AutoAimShoot extends AdjustShooter {
 		
 		// TODO, home shooter on init, VERY IMPORTANT
 		Log.info("Moving To: " + calculatedAngle);		
-		this.setAngle(10);
+		this.setAngle(calculatedAngle);
 	}
 
 
