@@ -2,6 +2,7 @@ package org.usfirst.frc.team1350.robot.commands.shooter.autoaim;
 
 import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.commands.shooter.AdjustShooter;
+import org.usfirst.frc.team1350.robot.commands.shooter.PIDAdjustShooter;
 import org.usfirst.frc.team1350.robot.commands.shooter.ShooterHome;
 import org.usfirst.frc.team1350.robot.subsystems.RangeFinder;
 import org.usfirst.frc.team1350.robot.subsystems.Shooter;
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 
-public class AutoAimShoot extends AdjustShooter {
+public class AutoAimShoot extends PIDAdjustShooter {
 	
 	private Shooter shooter;
 	private RangeFinder rangeFinder;
@@ -31,7 +32,6 @@ public class AutoAimShoot extends AdjustShooter {
 	
 	@Override
 	public void initialize() {
-		super.initialize();
 		double currentDistance = rangeFinder.getRange();
 		calculatedAngle = AutoAimCalculations.calculateAngle(currentDistance, velocityInMMPerSecond, heightOfGoalInMM);
 		Log.info("AutoAimShoot calculated: " + calculatedAngle);
@@ -41,6 +41,7 @@ public class AutoAimShoot extends AdjustShooter {
 		// TODO, home shooter on init, VERY IMPORTANT
 		Log.info("Moving To: " + calculatedAngle);		
 		this.setAngle(calculatedAngle);
+		super.initialize();
 	}
 
 

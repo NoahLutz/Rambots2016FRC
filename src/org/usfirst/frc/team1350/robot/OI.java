@@ -4,6 +4,7 @@ import org.usfirst.frc.team1350.robot.commands.shooter.AimAndShoot;
 import org.usfirst.frc.team1350.robot.commands.shooter.IntakeBall;
 import org.usfirst.frc.team1350.robot.commands.shooter.IntakeBallGroup;
 import org.usfirst.frc.team1350.robot.commands.shooter.KickBall;
+import org.usfirst.frc.team1350.robot.commands.shooter.PIDAdjustShooter;
 import org.usfirst.frc.team1350.robot.commands.shooter.SetShooterToHigh;
 import org.usfirst.frc.team1350.robot.commands.shooter.ShootBall;
 import org.usfirst.frc.team1350.robot.commands.shooter.ShooterHome;
@@ -101,10 +102,12 @@ public class OI {
 
 		//Camera
 		cameraSwitchButton1 = new JoystickButton(controller, RobotMap.CONT_CAM1);
-		cameraSwitchButton2 = new JoystickButton(controller, RobotMap.CONT_CAM2);
+		//cameraSwitchButton2 = new JoystickButton(controller, RobotMap.CONT_CAM2);
+		JoystickButton testShooterButton = new JoystickButton(controller, RobotMap.CONT_CAM2);
+		testShooterButton.whenPressed(new PIDAdjustShooter(10, 0));
 		
 		cameraSwitchButton1.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA_SET1));
-		cameraSwitchButton2.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA_SET2));
+		//cameraSwitchButton2.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA_SET2));
 	}
 }
 
