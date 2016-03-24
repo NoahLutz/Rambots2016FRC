@@ -4,11 +4,12 @@ import org.usfirst.frc.team1350.robot.commands.shooter.AimAndShoot;
 import org.usfirst.frc.team1350.robot.commands.shooter.IntakeBall;
 import org.usfirst.frc.team1350.robot.commands.shooter.IntakeBallGroup;
 import org.usfirst.frc.team1350.robot.commands.shooter.KickBall;
-import org.usfirst.frc.team1350.robot.commands.shooter.PIDAdjustShooter;
+import org.usfirst.frc.team1350.robot.commands.shooter.PIDAngleAdjustShooter;
 import org.usfirst.frc.team1350.robot.commands.shooter.SetShooterToHigh;
 import org.usfirst.frc.team1350.robot.commands.shooter.ShootBall;
 import org.usfirst.frc.team1350.robot.commands.shooter.ShooterHome;
-import org.usfirst.frc.team1350.robot.commands.shooter.autoaim.AutoAimShoot;
+import org.usfirst.frc.team1350.robot.commands.shooter.autoaim.AutoAimAngleAdjust;
+import org.usfirst.frc.team1350.robot.commands.shooter.autoaim.FullAutoAim;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -79,19 +80,19 @@ public class OI {
 		controller = new Joystick(RobotMap.CONTROLLER);
 		
 		//Shooter
-//		intakeBallButton = new JoystickButton(controller, RobotMap.CONT_INTAKE_BUTTON);
+		intakeBallButton = new JoystickButton(controller, RobotMap.CONT_INTAKE_BUTTON);
 //		shootBallButton = new JoystickButton(controller, RobotMap.CONT_FIRE_BUTTON);
 		autoShootButton = new JoystickButton(controller, RobotMap.CONT_AUTO_FIRE_BUTTON);
 		tempShooterHomeButton = new JoystickButton(controller, RobotMap.CONT_TEMP_SHOOTER_HOME);
-		tempKickerMotorButton = new JoystickButton(controller, RobotMap.CONT_TEMP_KICKER_BUTTON);
+		//tempKickerMotorButton = new JoystickButton(controller, RobotMap.CONT_TEMP_KICKER_BUTTON);
 		
-//		intakeBallButton.whenPressed(new IntakeBall(.5f));
+		intakeBallButton.whenPressed(new IntakeBallGroup());
 //		shootBallButton.whenPressed(new ShootBall(1,1, 3 ));	
 		tempShooterHomeButton.whenPressed(new ShooterHome());
 		
-		autoShootButton.whenPressed(new AutoAimShoot());
+		autoShootButton.whenPressed(new FullAutoAim());
 		
-		tempKickerMotorButton.whenPressed(new KickBall(0));
+		//tempKickerMotorButton.whenPressed(new KickBall(0));
 		
 		//Lifter
 		lifterUp = new JoystickButton(controller, RobotMap.CONT_LIFTER_UP);
@@ -104,7 +105,7 @@ public class OI {
 		cameraSwitchButton1 = new JoystickButton(controller, RobotMap.CONT_CAM1);
 		//cameraSwitchButton2 = new JoystickButton(controller, RobotMap.CONT_CAM2);
 		JoystickButton testShooterButton = new JoystickButton(controller, RobotMap.CONT_CAM2);
-		testShooterButton.whenPressed(new PIDAdjustShooter(10, 0));
+		testShooterButton.whenPressed(new PIDAngleAdjustShooter(10, 0));
 		
 		cameraSwitchButton1.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA_SET1));
 		//cameraSwitchButton2.whenPressed(new ChangeCamera(RobotMap.RPI_CAMERA_SET2));

@@ -3,7 +3,7 @@ package org.usfirst.frc.team1350.robot.subsystems;
 import org.usfirst.frc.team1350.robot.Log;
 import org.usfirst.frc.team1350.robot.OI;
 import org.usfirst.frc.team1350.robot.RobotMap;
-import org.usfirst.frc.team1350.robot.commands.shooter.PIDAdjustShooter;
+import org.usfirst.frc.team1350.robot.commands.shooter.PIDAngleAdjustShooter;
 import org.usfirst.frc.team1350.robot.commands.shooter.SetShooterToHigh;
 import org.usfirst.frc.team1350.robot.commands.shooter.ShooterHome;
 import org.usfirst.frc.team1350.robot.utils.Utils;
@@ -53,7 +53,7 @@ public class Shooter extends PIDSubsystem {
 	private DigitalInput topLimit;
 	
 	private Talon kickerMotor;
-	private static double p = .0005;
+	private static double p = .00135;
 	private static double i = 0;
 	private static double d = 0;
 	
@@ -80,7 +80,7 @@ public class Shooter extends PIDSubsystem {
 		SmartDashboard.putNumber("P", p);
 		SmartDashboard.putNumber("I", i);
 		SmartDashboard.putNumber("D", d);
-		double range = .5;
+		double range = .25;
 		this.setAbsoluteTolerance(150);
 		this.setOutputRange(-range, range);
 		SmartDashboard.putNumber("PIDRange", range);
@@ -189,9 +189,9 @@ public class Shooter extends PIDSubsystem {
 	@Override
 	protected void usePIDOutput(double output) {
 		// TODO Auto-generated method stub
-		Log.info("PIDOuput: " + output);
-		Log.info("CurrentShooterTilt: " + getCurrentShooterTilt());
-		Log.info("CurrentSetPoint: " + this.getSetpoint());
+		SmartDashboard.putNumber("PIDOuput: ", output);
+		SmartDashboard.putNumber("CurrentShooterTilt: ", this.getCurrentShooterTilt());
+		SmartDashboard.putNumber("CurrentSetPoint: ", this.getSetpoint());
 		SmartDashboard.putNumber("Ultrasonic: ", RangeFinder.getInstance().getRange());
 		tiltMotor.pidWrite(-output);
 	}

@@ -12,7 +12,8 @@ public class IntakeBallGroup extends CommandGroup {
     public IntakeBallGroup() {
     	float intakeSpeed = 0.5f;
 
-    	addSequential(new ShooterHome());
-//    	addSequential(new IntakeBall(intakeSpeed));
+    	//addSequential(new ShooterHome());
+    	addSequential(new PIDEncoderAdjustShooter(4500, 3));
+    	addSequential(new IntakeBall(intakeSpeed));
     }
 }

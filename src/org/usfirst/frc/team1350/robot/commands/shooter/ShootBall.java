@@ -30,7 +30,7 @@ public class ShootBall extends Command {
 
 	@Override
 	protected void execute() {
-		Log.info("Shooting Ball");
+		//Log.info("Shooting Ball");
 		shooter.runShooterMotor(speed, Shooter.FORWARD);
 	}
 
