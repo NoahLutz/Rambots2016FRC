@@ -41,7 +41,6 @@ public class Robot extends IterativeRobot {
     	//start camera server and start auto capture
     	camera = CameraServer.getInstance();
     	camera.setQuality(50);
-//		camera.startAutomaticCapture("cam1");
 		camera.startAutomaticCapture("cam0");
 
     	Log.info("Initializing Robot");

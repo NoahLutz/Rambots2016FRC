@@ -10,25 +10,26 @@ public class KickBall extends Command {
 
 	private Shooter shooter;
 	private double rampUpDelay;
-	private double timeout = .5;
+	private double timeout = 2;
 	
 	public KickBall(double rampUpDelay) {
 		shooter = Shooter.getInstance();
 		this.rampUpDelay = rampUpDelay;
-		
+		Log.info("NewKickBall");
 		requires(shooter);
 	}
 	
 	@Override
 	protected void initialize() {
+		Log.info("InitKickBall: RampUp: " + rampUpDelay);
 		Timer.delay(rampUpDelay);
-		setTimeout(timeout);
+		setTimeout(timeout+rampUpDelay);
 	}
 
 	@Override
 	protected void execute() {
 		shooter.kickBall();
-		Log.info("Running kickball");
+//		Log.info("Running kickball");
 	}
 
 	@Override
@@ -43,7 +44,6 @@ public class KickBall extends Command {
 
 	@Override
 	protected void interrupted() {
-		shooter.stopKickingBall();
 	}
 	
 	

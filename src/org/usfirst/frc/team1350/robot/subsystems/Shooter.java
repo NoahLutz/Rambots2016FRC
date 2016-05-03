@@ -40,6 +40,8 @@ public class Shooter extends PIDSubsystem {
 	public static final boolean TILT_REVERSE = true;
 	// TODO adjust
 	public static final float TILT_HOME_POSITION_PRECISION=0.1f;
+	public static final int ANGLE_INTAKE_ENCODER = 4500;
+	public static final int ANGLE_MIDPOINT_ENCODER = 3200;
 
 	private VictorSP shooterMotors;
 	private DigitalInput ballSwitch;
@@ -53,7 +55,7 @@ public class Shooter extends PIDSubsystem {
 	private DigitalInput topLimit;
 	
 	private Talon kickerMotor;
-	private static double p = .00135;
+	private static double p = .0012;//.00135
 	private static double i = 0;
 	private static double d = 0;
 	
@@ -80,7 +82,7 @@ public class Shooter extends PIDSubsystem {
 		SmartDashboard.putNumber("P", p);
 		SmartDashboard.putNumber("I", i);
 		SmartDashboard.putNumber("D", d);
-		double range = .25;
+		double range = .5;
 		this.setAbsoluteTolerance(150);
 		this.setOutputRange(-range, range);
 		SmartDashboard.putNumber("PIDRange", range);
@@ -94,7 +96,6 @@ public class Shooter extends PIDSubsystem {
 		// TODO figure out when to call home command 
 //		SetShooterToHigh shooterHomeCommand = new SetShooterToHigh();
 //		shooterHomeCommand.start();
-		encoder.reset();
 	}
 	
 	public boolean isAnyLimitHit() {
@@ -172,10 +173,12 @@ public class Shooter extends PIDSubsystem {
     }
 
 	public void kickBall() {
+//		Log.info("KickerMotor set to ON");
 		kickerMotor.set(1);
 	}
     
 	public void stopKickingBall() {
+		Log.info("KickerMotor set to OFF");
 		kickerMotor.set(0);
 	}
 
@@ -192,7 +195,7 @@ public class Shooter extends PIDSubsystem {
 		SmartDashboard.putNumber("PIDOuput: ", output);
 		SmartDashboard.putNumber("CurrentShooterTilt: ", this.getCurrentShooterTilt());
 		SmartDashboard.putNumber("CurrentSetPoint: ", this.getSetpoint());
-		SmartDashboard.putNumber("Ultrasonic: ", RangeFinder.getInstance().getRange());
+		//SmartDashboard.putNumber("Ultrasonic: ", RangeFinder.getInstance().getRange());
 		tiltMotor.pidWrite(-output);
 	}
 

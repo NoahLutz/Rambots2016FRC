@@ -41,8 +41,10 @@ public class IntakeBall extends Command {
 	@Override
 	protected boolean isFinished() {
 		// TODO invert the method name
-		Log.info("in IsFinished IntakeBall");
-		return (!shooter.ballIsInShooter()) || isTimedOut();
+		if(shooter.ballIsInShooter()){
+			Log.info("in IsFinished IntakeBall");
+		}
+		return (shooter.ballIsInShooter()) || isTimedOut();
 	}
 
 	@Override

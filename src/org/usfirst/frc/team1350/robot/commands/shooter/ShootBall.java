@@ -11,15 +11,16 @@ public class ShootBall extends Command {
 	private Shooter shooter;
 	private double speed;
 	private double stopMotorDelay;
+	private double shootBallDelay;
 	private double timeout;
 	
 	// Speed is -1.0 to 1.0, delay is time in seconds
-	public ShootBall(double speed, double stopMotorDelay, double timeout) {
+	public ShootBall(double speed, double stopMotorDelay, double timeout, double shootBallDelay) {
 		this.timeout = timeout;
 		shooter = Shooter.getInstance();
 		this.stopMotorDelay = stopMotorDelay;
 		this.speed = speed;
-		
+		this.shootBallDelay = shootBallDelay;
 		requires(shooter);
 	}
 
@@ -30,8 +31,10 @@ public class ShootBall extends Command {
 
 	@Override
 	protected void execute() {
-		//Log.info("Shooting Ball");
+//		Log.info("Shooting Ball");
 		shooter.runShooterMotor(speed, Shooter.FORWARD);
+		Timer.delay(shootBallDelay);
+		shooter.kickBall();
 	}
 
 	@Override
@@ -48,6 +51,7 @@ public class ShootBall extends Command {
 	protected void end() {
 		Timer.delay(stopMotorDelay);
 		shooter.stopShooterMotors();
+		shooter.stopKickingBall();
 	}
 
 	@Override

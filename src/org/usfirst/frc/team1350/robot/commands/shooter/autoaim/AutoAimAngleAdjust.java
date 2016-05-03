@@ -35,7 +35,7 @@ public class AutoAimAngleAdjust extends PIDAngleAdjustShooter {
 	public void initialize() {
 		double currentDistance = rangeFinder.getRange();
 		calculatedAngle = AutoAimCalculations.calculateAngle(currentDistance, velocityInMMPerSecond, heightOfGoalInMM);
-		calculatedAngle += 30;
+		calculatedAngle += 20;
 		Log.info("AutoAimShoot calculated: " + calculatedAngle);
 		
 		// TODO add out of range angle default angle/move to highest
